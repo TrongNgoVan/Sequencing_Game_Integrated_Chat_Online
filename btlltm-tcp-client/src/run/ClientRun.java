@@ -127,6 +127,6 @@ public class ClientRun {
 
     public static void main(String[] args) {
         new ClientRun();
-        System.out.println("Client is runing..");
+        System.out.println("Client is oke");
     }
 }
