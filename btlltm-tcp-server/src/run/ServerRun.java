@@ -62,7 +62,7 @@ public class ServerRun {
                 }
             }
 
-            System.out.println("shutingdown executor...");
+            System.out.println("Đã đóng");
             executor.shutdownNow();
 
         } catch (IOException ex) {
