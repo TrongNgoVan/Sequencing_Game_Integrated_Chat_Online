@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author admin
@@ -16,6 +18,13 @@ public class ServerView extends javax.swing.JFrame {
      */
     public ServerView() {
         initComponents();
+        setIcon();
+    }
+     private void setIcon() {
+        // Tạo ImageIcon từ tài nguyên
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Static/icon.png"));
+        // Thiết lập icon cho JFrame
+        setIconImage(icon.getImage());
     }
      public void appendLog(String message) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
