@@ -140,4 +140,47 @@ public class UserController {
         }   
         return null;
     }
+        private final String GET_RANKING = "SELECT username, score, avgCompetitor, avgTime FROM users ORDER BY score DESC, avgCompetitor DESC, avgTime ASC";
+        public String getRanking() {
+        StringBuilder ranking = new StringBuilder();
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(GET_RANKING);
+
+            ranking.append("Rank\tUsername\tScore\tAvg Competitor\tAvg Time\n");
+            int rank = 1;
+            while (rs.next()) {
+                String username = rs.getString("username");
+                float score = rs.getFloat("score");
+                float avgCompetitor = rs.getFloat("avgCompetitor");
+                float avgTime = rs.getFloat("avgTime");
+
+                ranking.append(rank).append("\t")
+                       .append(username).append("\t")
+                       .append(score).append("\t")
+                       .append(avgCompetitor).append("\t")
+                       .append(avgTime).append("\n");
+                rank++;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ranking.toString();
+    }
+        
+   
+    public static void main(String[] args) {
+        // Tạo một đối tượng UserController
+        UserController userController = new UserController();
+
+        // Gọi hàm getRanking() để lấy danh sách xếp hạng
+        String ranking = userController.getRanking();
+
+        // In ra kết quả của bảng xếp hạng
+        System.out.println("===== BẢNG XẾP HẠNG NGƯỜI CHƠI =====");
+        System.out.println(ranking);
+    }
+
+
 }
