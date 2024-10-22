@@ -281,8 +281,11 @@ public class GameView extends javax.swing.JFrame {
         lbResult = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 0, 0));
 
+        infoPLayer.setBackground(new java.awt.Color(204, 0, 0));
         infoPLayer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        infoPLayer.setForeground(new java.awt.Color(255, 255, 255));
         infoPLayer.setText("Play game with:");
 
         btnLeaveGame.setBackground(new java.awt.Color(204, 0, 0));
@@ -509,6 +512,9 @@ public class GameView extends javax.swing.JFrame {
 
         pbgTimer.setStringPainted(true);
 
+        btnSubmit.setBackground(new java.awt.Color(204, 0, 0));
+        btnSubmit.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -516,6 +522,9 @@ public class GameView extends javax.swing.JFrame {
             }
         });
 
+        btnStart.setBackground(new java.awt.Color(204, 0, 0));
+        btnStart.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnStart.setForeground(new java.awt.Color(255, 255, 255));
         btnStart.setText("Start");
         btnStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
