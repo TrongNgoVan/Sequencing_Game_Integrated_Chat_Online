@@ -15,7 +15,7 @@ import connection.DatabaseConnection;
 import model.UserModel;
 /**
  *
- * @author admin
+ * @author Ngọ Văn Trọng
  */
 public class UserController {
     //  SQL
