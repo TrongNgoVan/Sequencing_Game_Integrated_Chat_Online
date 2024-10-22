@@ -295,7 +295,7 @@ public class GameView extends javax.swing.JFrame {
 
         infoPLayer.setBackground(new java.awt.Color(204, 0, 0));
         infoPLayer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        infoPLayer.setForeground(new java.awt.Color(255, 255, 255));
+        infoPLayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/swords.gif"))); // NOI18N
         infoPLayer.setText("Play game with:");
 
         btnLeaveGame.setBackground(new java.awt.Color(204, 0, 0));
