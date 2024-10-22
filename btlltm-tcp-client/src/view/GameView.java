@@ -12,6 +12,7 @@ import run.ClientRun;
 import helper.*;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -33,8 +34,17 @@ public class GameView extends javax.swing.JFrame {
     /**
      * Creates new form GameView
      */
+   
+
+    private void setIcon() {
+        // Tạo ImageIcon từ tài nguyên
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Static/icon.png"));
+        // Thiết lập icon cho JFrame
+        setIconImage(icon.getImage());
+    }
     public GameView() {
         initComponents();
+        setIcon(); 
         
         panel.setVisible(false);
         panelPlayAgain.setVisible(false);

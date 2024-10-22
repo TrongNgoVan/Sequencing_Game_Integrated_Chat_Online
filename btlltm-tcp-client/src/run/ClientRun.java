@@ -1,6 +1,8 @@
 package run;
 
 import controller.SocketHandler;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import view.ConnectServer;
 import view.GameView;
 import view.HomeView;
@@ -31,10 +33,13 @@ public class ClientRun {
 
     // controller 
     public static SocketHandler socketHandler;
+ 
+
 
     public ClientRun() {
         socketHandler = new SocketHandler();
         initScene();
+     
         openScene(SceneName.CONNECTSERVER);
     }
 
@@ -47,7 +52,8 @@ public class ClientRun {
         messageView = new MessageView();
         gameView = new GameView();
     }
-
+    
+    
     public static void openScene(SceneName sceneName) {
         if (null != sceneName) {
             switch (sceneName) {

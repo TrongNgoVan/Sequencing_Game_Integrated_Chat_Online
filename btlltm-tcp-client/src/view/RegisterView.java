@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import run.ClientRun;
 /**
@@ -17,6 +18,13 @@ public class RegisterView extends javax.swing.JFrame {
      */
     public RegisterView() {
         initComponents();
+        setIcon();
+    }
+     private void setIcon() {
+        // Tạo ImageIcon từ tài nguyên
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Static/icon.png"));
+        // Thiết lập icon cho JFrame
+        setIconImage(icon.getImage());
     }
 
     /**

@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import run.ClientRun;
 
@@ -17,8 +18,16 @@ public class ConnectServer extends javax.swing.JFrame {
     /**
      * Creates new form ConnectServer
      */
-    public ConnectServer() {
+     public ConnectServer() {
         initComponents();
+        setIcon(); // Gọi phương thức thiết lập icon
+    }
+
+    private void setIcon() {
+        // Tạo ImageIcon từ tài nguyên
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Static/icon.png"));
+        // Thiết lập icon cho JFrame
+        setIconImage(icon.getImage());
     }
 
     /**

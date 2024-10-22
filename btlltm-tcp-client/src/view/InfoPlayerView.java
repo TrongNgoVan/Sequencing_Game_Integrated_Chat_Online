@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author admin
@@ -16,6 +18,14 @@ public class InfoPlayerView extends javax.swing.JFrame {
      */
     public InfoPlayerView() {
         initComponents();
+        setIcon();
+        
+    }
+     private void setIcon() {
+        // Tạo ImageIcon từ tài nguyên
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Static/icon.png"));
+        // Thiết lập icon cho JFrame
+        setIconImage(icon.getImage());
     }
 
     public void setInfoUser (String username, String score, String win, String draw, String lose, String avgCompetitor, String avgTime, String status) {

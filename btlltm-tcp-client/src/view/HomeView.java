@@ -6,6 +6,7 @@
 package view;
 
 import java.util.Vector;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,10 +24,15 @@ public class HomeView extends javax.swing.JFrame {
     public void getUserOnline() {
         
     }
-    
+     private void setIcon() {
+        // Tạo ImageIcon từ tài nguyên
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Static/icon.png"));
+        // Thiết lập icon cho JFrame
+        setIconImage(icon.getImage());
+    }
     public HomeView() {
         initComponents();
-        
+        setIcon();
     }
 
     public void setStatusCompetitor (String status) {
