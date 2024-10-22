@@ -59,7 +59,7 @@ public class LoginView extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(204, 0, 0));
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/user.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/avatar.png"))); // NOI18N
         jLabel2.setText(" Username");
 
         tfPassword.addActionListener(new java.awt.event.ActionListener() {
