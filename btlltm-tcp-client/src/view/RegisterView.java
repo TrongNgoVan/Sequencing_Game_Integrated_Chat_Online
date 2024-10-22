@@ -87,7 +87,7 @@ public class RegisterView extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/avatar.png"))); // NOI18N
-        jLabel2.setText("Usernam");
+        jLabel2.setText("Username");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/pass.png"))); // NOI18N
