@@ -81,6 +81,7 @@ public class InfoPlayerView extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Status:");
 
+        jButton1.setBackground(new java.awt.Color(204, 0, 0));
         jButton1.setText("OKE");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
