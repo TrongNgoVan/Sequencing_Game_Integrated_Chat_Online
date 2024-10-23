@@ -45,7 +45,7 @@
 #### Ae copy cái Token này vào mật khẩu ở netbean.
 ![image](https://github.com/user-attachments/assets/73408576-2eca-49c9-b1de-4ed65a87812d)
 
-
+#### Anh Trọng lộ token rồi, tý vào nick a Trọng nghịch :)))))))
 
 
 #### Sau đó, ae vào Proxy Configuration để No Proxy
