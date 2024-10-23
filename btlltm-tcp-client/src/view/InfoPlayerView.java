@@ -97,6 +97,9 @@ public class InfoPlayerView extends javax.swing.JFrame {
             }
         });
 
+        infoUserName.setEditable(false);
+        infoUserName.setBackground(new java.awt.Color(255, 255, 255));
+
         infoUserScore.setEditable(false);
         infoUserScore.setBackground(new java.awt.Color(255, 255, 255));
 
