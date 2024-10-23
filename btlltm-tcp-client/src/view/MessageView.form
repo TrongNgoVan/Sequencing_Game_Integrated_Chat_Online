@@ -54,8 +54,8 @@
               <Component id="jScrollPane1" min="-2" pref="213" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSend" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="tfMessage" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="btnSend" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
+                  <Component id="tfMessage" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>

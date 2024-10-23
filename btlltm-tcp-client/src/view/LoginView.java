@@ -49,6 +49,13 @@ public class LoginView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
+        tfUsername.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        tfUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfUsernameActionPerformed(evt);
+            }
+        });
+
         btnLogin.setBackground(new java.awt.Color(204, 0, 0));
         btnLogin.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(255, 255, 255));
@@ -66,17 +73,18 @@ public class LoginView extends javax.swing.JFrame {
         jLabel1.setText(" Login");
 
         jLabel2.setBackground(new java.awt.Color(204, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/avatar.png"))); // NOI18N
         jLabel2.setText(" Username");
 
+        tfPassword.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         tfPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPasswordActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/pass.png"))); // NOI18N
         jLabel3.setText(" Password");
 
@@ -116,7 +124,7 @@ public class LoginView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,6 +188,10 @@ public class LoginView extends javax.swing.JFrame {
         this.dispose();
         ClientRun.openScene(ClientRun.SceneName.REGISTER);
     }//GEN-LAST:event_btnChangeRegisterActionPerformed
+
+    private void tfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfUsernameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

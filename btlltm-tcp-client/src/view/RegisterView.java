@@ -49,13 +49,14 @@ public class RegisterView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tfPassword.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         tfPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPasswordActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/pass.png"))); // NOI18N
         jLabel3.setText("Confirm");
 
@@ -69,6 +70,8 @@ public class RegisterView extends javax.swing.JFrame {
                 btnChangeLoginActionPerformed(evt);
             }
         });
+
+        tfUsername.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
         btnRegister.setBackground(new java.awt.Color(204, 0, 0));
         btnRegister.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -85,14 +88,15 @@ public class RegisterView extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/user.gif"))); // NOI18N
         jLabel1.setText("Register");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/avatar.png"))); // NOI18N
         jLabel2.setText("Username");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/pass.png"))); // NOI18N
         jLabel4.setText("Password");
 
+        tfConfirmPassword.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         tfConfirmPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfConfirmPasswordActionPerformed(evt);
