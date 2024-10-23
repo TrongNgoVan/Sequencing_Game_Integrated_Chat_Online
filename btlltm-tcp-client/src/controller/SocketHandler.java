@@ -88,6 +88,9 @@ public class SocketHandler {
                     case "GET_INFO_USER":
                         onReceiveGetInfoUser(received);
                         break;
+                    case "GET_RANKING":
+                        onReceiveGetRanking(received);
+                        break;
                     case "ACCEPT_MESSAGE":
                         onReceiveAcceptMessage(received);
                         break;
@@ -183,6 +186,9 @@ public class SocketHandler {
     public void getInfoUser(String username) {
         sendData("GET_INFO_USER;" + username);
     }
+     public void getRanking(){
+        sendData("GET_RANKING");
+    }
     
     public void checkStatusUser(String username) {
         sendData("CHECK_STATUS_USER;" + username);
@@ -203,12 +209,12 @@ public class SocketHandler {
             
         sendData("CHAT_MESSAGE;" + loginUser + ";" + userInvited  + ";" + message);
     }
-    
+   
     // Play game
     public void inviteToPlay (String userInvited) {
         sendData("INVITE_TO_PLAY;" + loginUser + ";" + userInvited);
     }
-    
+   
     public void leaveGame (String userInvited) { 
         sendData("LEAVE_TO_GAME;" + loginUser + ";" + userInvited + ";" + roomIdPresent);
     }
@@ -261,7 +267,31 @@ public class SocketHandler {
                 .getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+      private void onReceiveGetRanking(String received) {
+    // Kiểm tra xem nhận được dữ liệu thành công
+      String[] splitted = received.split(";");
+        String status = splitted[1];
+
+        if (status.equals("success")) {
+  
+        // Tách dữ liệu thành từng dòng
+         String[] lines = splitted[2].split("\n");
+
+        // Khởi tạo một StringBuilder để lưu thông tin xếp hạng
+        StringBuilder rankingData = new StringBuilder();
+
+        // Bắt đầu từ dòng đầu tiên (dòng tiêu đề) và bỏ qua nó
+        for (int i = 1; i < lines.length; i++) {
+            if (lines[i].trim().isEmpty()) continue; // Bỏ qua dòng trống
+            rankingData.append(lines[i].trim()).append("\n"); // Thêm mỗi dòng vào StringBuilder
+        }
+
+        // Gọi phương thức setRanking để cập nhật thông tin xếp hạng
+        ClientRun.openScene(ClientRun.SceneName.RANKINGVIEW); // Chuyển đến cảnh xếp hạng
+        ClientRun.rankingView.setRanking(rankingData.toString()); // Gọi phương thức hiển thị thông tin xếp hạng
+    }
+}
+
     /***
      * Handle receive data from server
      */
@@ -359,6 +389,9 @@ public class SocketHandler {
             ClientRun.infoPlayerView.setInfoUser(userName, userScore, userWin, userDraw, userLose, userAvgCompetitor, userAvgTime, userStatus);
         }
     }
+  
+
+
     
     private void onReceiveLogout(String received) {
         // get status from data
