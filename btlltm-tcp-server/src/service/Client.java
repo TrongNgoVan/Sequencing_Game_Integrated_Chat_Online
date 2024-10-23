@@ -158,11 +158,6 @@ public class Client implements Runnable {
             return "failed;" + e.getMessage();
         }
     }
-    private void onReceiveGetRanking(String received){
-       String result = new UserController().getRanking();
-       sendData("GET_RANKING" + ";" + result);
-        
-    }
     
     private void onReceiveLogin(String received) {
         // get email / password from data
@@ -225,7 +220,11 @@ public class Client implements Runnable {
         // send result
         sendData("GET_INFO_USER" + ";" + result + ";" + status);
     }
-    
+    private void onReceiveGetRanking(String received){
+       String result = new UserController().getRanking();
+      sendData("GET_RANKING" + ";" + result) ;
+        
+    }
     private void onReceiveLogout() {
         this.loginUser = null;
         // send result
