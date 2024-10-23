@@ -52,7 +52,6 @@ public class ConnectServer extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/connected.gif"))); // NOI18N
         jLabel1.setText("CONNECT TO SERVER");
 
-        txIP.setEditable(false);
         txIP.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txIP.setText("26.80.253.0");
         txIP.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +68,6 @@ public class ConnectServer extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/port.png"))); // NOI18N
         jLabel3.setText("PORT");
 
-        txPort.setEditable(false);
         txPort.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txPort.setText("8889");
         txPort.addActionListener(new java.awt.event.ActionListener() {

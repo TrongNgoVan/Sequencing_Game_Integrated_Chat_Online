@@ -77,10 +77,9 @@ public class RankingView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Ranking = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jDesktopPane1.setBackground(new java.awt.Color(204, 0, 0));
         jDesktopPane1.setForeground(new java.awt.Color(204, 51, 0));
+        jDesktopPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
