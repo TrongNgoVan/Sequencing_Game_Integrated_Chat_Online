@@ -67,6 +67,9 @@ public class Client implements Runnable {
                     case "GET_INFO_USER":
                         onReceiveGetInfoUser(received);
                         break;
+                    case "GET_RANKING":
+                        onReceiveGetRanking(received);
+                        break;
                     case "LOGOUT":
                         onReceiveLogout();
                         break;  
@@ -74,6 +77,7 @@ public class Client implements Runnable {
                         onReceiveClose();
                         break; 
                     // chat
+                    
                     case "INVITE_TO_CHAT":
                         onReceiveInviteToChat(received);
                         break;
@@ -154,6 +158,11 @@ public class Client implements Runnable {
             return "failed;" + e.getMessage();
         }
     }
+    private void onReceiveGetRanking(String received){
+       String result = new UserController().getRanking();
+       sendData("GET_RANKING" + ";" + result);
+        
+    }
     
     private void onReceiveLogin(String received) {
         // get email / password from data
@@ -233,6 +242,7 @@ public class Client implements Runnable {
         String msg = "INVITE_TO_CHAT;" + "success;" + userHost + ";" + userInvited;
         ServerRun.clientManager.sendToAClient(userInvited, msg);
     }
+    
     
     private void onReceiveAcceptMessage(String received) {
         String[] splitted = received.split(";");
