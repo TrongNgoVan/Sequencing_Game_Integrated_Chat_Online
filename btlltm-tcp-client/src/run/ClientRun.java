@@ -10,6 +10,7 @@ import view.InfoPlayerView;
 import view.LoginView;
 import view.MessageView;
 import view.RegisterView;
+import view.RankingView;
 
 public class ClientRun {
     public enum SceneName {
@@ -18,6 +19,7 @@ public class ClientRun {
         REGISTER,
         HOMEVIEW,
         INFOPLAYER,
+        RANKINGVIEW,
         MESSAGEVIEW,
         GAMEVIEW
     }
@@ -30,6 +32,7 @@ public class ClientRun {
     public static GameView gameView;
     public static InfoPlayerView infoPlayerView;
     public static MessageView messageView;
+    public static RankingView rankingView;
 
     // controller 
     public static SocketHandler socketHandler;
@@ -49,6 +52,7 @@ public class ClientRun {
         registerView = new RegisterView();
         homeView = new HomeView();
         infoPlayerView = new InfoPlayerView();
+        rankingView = new RankingView();
         messageView = new MessageView();
         gameView = new GameView();
     }
@@ -76,6 +80,10 @@ public class ClientRun {
                 case INFOPLAYER:
                     infoPlayerView = new InfoPlayerView();
                     infoPlayerView.setVisible(true);
+                    break;
+                case RANKINGVIEW:
+                    rankingView = new RankingView();
+                    rankingView.setVisible(true);
                     break;
                 case MESSAGEVIEW:
                     messageView = new MessageView();
@@ -109,6 +117,9 @@ public class ClientRun {
                 case INFOPLAYER:
                     infoPlayerView.dispose();
                     break;
+                case RANKINGVIEW:
+                    rankingView.dispose();
+                    break;
                 case MESSAGEVIEW:
                     messageView.dispose();
                     break;
@@ -128,6 +139,7 @@ public class ClientRun {
         homeView.dispose();
         infoPlayerView.dispose();
         messageView.dispose();
+        rankingView.dispose();
         gameView.dispose();
     }
 
