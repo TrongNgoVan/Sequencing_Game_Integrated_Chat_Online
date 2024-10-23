@@ -166,7 +166,7 @@ public class UserController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ranking.toString();
+        return "success;" + ranking.toString();
     }
         
    
