@@ -59,7 +59,53 @@
 
 ![image](https://github.com/user-attachments/assets/309faf2a-18ed-4d24-ac25-40b48443bd40)
 
+
+
 ### => Chốt lại, ae cứ làm một lượt và commit một lượt, cuối ngày rồi push lên cũng được, vì chỉ cần ae lưu lại commit trong máy thì nó đẩy lên github hết mà.
+
+
+# Demo App.
+## 1. Server Run.
+![image](https://github.com/user-attachments/assets/9055f8fb-effd-450b-a16c-c7fb475ff317)
+
+## 2. Client Run.
+
+![image](https://github.com/user-attachments/assets/422bca9e-5b12-44fa-ace4-e3d582b32742)
+
+### 2.1 Client Connect, Server ghi Log.
+
+![image](https://github.com/user-attachments/assets/0f97d2e5-3e0b-4935-a17b-d3afecdd20d5)
+
+### 2.2 Client Login -> Home.
+![image](https://github.com/user-attachments/assets/abd2b4e9-1f52-4899-8fe2-80d6e7eb19c7)
+
+### 2.3 Client Chat với nhau.
+
+![image](https://github.com/user-attachments/assets/04c467b6-8c22-467e-9290-01bfd45a26da)
+
+![image](https://github.com/user-attachments/assets/12e63886-b677-4714-b748-49e063f3debe)
+
+
+### 2.4 Client xem Rank, xem Infor của nhau.
+![image](https://github.com/user-attachments/assets/423061af-2a17-44b0-a8ae-57164e401886)
+
+
+### 2.5 Client chơi Game với nhau.
+
+![image](https://github.com/user-attachments/assets/10fc866c-b621-4bd2-b404-f4412c3755b0)
+
+![image](https://github.com/user-attachments/assets/5540bc27-9fc3-4f74-9512-e343a04793e9)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
