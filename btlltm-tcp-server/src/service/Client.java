@@ -19,7 +19,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author admin
+ * @author Ngọ Văn Trọng
  */
 public class Client implements Runnable {
     Socket s;

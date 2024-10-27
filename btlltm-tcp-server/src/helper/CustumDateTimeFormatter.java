@@ -2,7 +2,10 @@ package helper;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
 public class CustumDateTimeFormatter {
     public static String getCurrentTimeFormatted() {
         return new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());

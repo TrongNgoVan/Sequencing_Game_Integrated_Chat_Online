@@ -3,7 +3,10 @@ package connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
 public class DatabaseConnection {
 	
     private String jdbcURL = "jdbc:mysql://localhost:3306/btlltm?useSSL=false";

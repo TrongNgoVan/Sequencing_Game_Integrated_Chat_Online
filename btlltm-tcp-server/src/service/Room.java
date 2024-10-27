@@ -10,7 +10,10 @@ import java.util.Arrays;
 import java.util.concurrent.Callable;
 import model.UserModel;
 import run.ServerRun;
-
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
 public class Room {
     String id;
     String time = "00:00";

@@ -93,7 +93,10 @@ import service.Client;
 import service.ClientManager;
 import service.RoomManager;
 import view.ServerView;
-
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
 public class ServerRun {
 
     public static volatile ClientManager clientManager;

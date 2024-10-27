@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author admin
+ * @author Ngọ Văn Trọng
  */
 public class ClientManager {
     ArrayList<Client> clients;

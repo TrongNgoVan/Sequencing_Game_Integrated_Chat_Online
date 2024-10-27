@@ -42,7 +42,7 @@ public class UserController {
             p.setString(1, username);
             ResultSet r = p.executeQuery();
             if (r.first()) {
-                return "failed;" + "User Already Exit";
+                return "failed;" + "Người dùng đã tồn tại";
             } else {
                 r.close();
                 p.close();
@@ -71,7 +71,7 @@ public class UserController {
                 float score = r.getFloat("score");
                 return "success;" + username + ";" + score;
             } else {
-                return "failed;" + "Please enter the correct account password!";
+                return "failed;" + "Mày hãy điền đúng tài khoản và mật khẩu";
             }
         } catch (SQLException e) {
         }

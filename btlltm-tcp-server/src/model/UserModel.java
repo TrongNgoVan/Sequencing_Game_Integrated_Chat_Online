@@ -1,7 +1,10 @@
 package model;
 
 import java.io.Serializable;
-
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
 public class UserModel implements Serializable {
     private static final long serialVersionUID = 1L;
 	

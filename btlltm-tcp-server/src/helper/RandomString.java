@@ -4,7 +4,10 @@ import java.security.SecureRandom;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
-
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
 public class RandomString {
      public String nextString() {
         for (int idx = 0; idx < buf.length; ++idx) {
