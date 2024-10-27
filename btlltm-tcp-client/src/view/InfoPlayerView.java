@@ -99,12 +99,15 @@ public class InfoPlayerView extends javax.swing.JFrame {
 
         infoUserName.setEditable(false);
         infoUserName.setBackground(new java.awt.Color(255, 255, 255));
+        infoUserName.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
         infoUserScore.setEditable(false);
         infoUserScore.setBackground(new java.awt.Color(255, 255, 255));
+        infoUserScore.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
         infoUserStatus.setEditable(false);
         infoUserStatus.setBackground(new java.awt.Color(255, 255, 255));
+        infoUserStatus.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Win:");
@@ -123,18 +126,23 @@ public class InfoPlayerView extends javax.swing.JFrame {
 
         infoUserWin.setEditable(false);
         infoUserWin.setBackground(new java.awt.Color(255, 255, 255));
+        infoUserWin.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
         infoUserDraw.setEditable(false);
         infoUserDraw.setBackground(new java.awt.Color(255, 255, 255));
+        infoUserDraw.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
         infoUserLose.setEditable(false);
         infoUserLose.setBackground(new java.awt.Color(255, 255, 255));
+        infoUserLose.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
         infoUserAvgCompetitor.setEditable(false);
         infoUserAvgCompetitor.setBackground(new java.awt.Color(255, 255, 255));
+        infoUserAvgCompetitor.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
 
         infoUserAvgTime.setEditable(false);
         infoUserAvgTime.setBackground(new java.awt.Color(255, 255, 255));
+        infoUserAvgTime.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         infoUserAvgTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 infoUserAvgTimeActionPerformed(evt);
@@ -220,7 +228,7 @@ public class InfoPlayerView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(infoUserAvgTime, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(infoUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))

@@ -195,7 +195,7 @@ public class RegisterView extends javax.swing.JFrame {
         } else if (confirmPassword.equals("")) {
                 tfConfirmPassword.grabFocus();
         } else if (!password.equals(confirmPassword)) {
-                JOptionPane.showMessageDialog(btnRegister, "Confirm Password is false!");
+                JOptionPane.showMessageDialog(btnRegister, "Nhập mật khẩu lại không trùng khớp!");
                 tfConfirmPassword.grabFocus();
         } else {
            ClientRun.socketHandler.register(userName, password);

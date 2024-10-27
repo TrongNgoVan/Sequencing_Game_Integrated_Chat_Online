@@ -28,7 +28,7 @@ public class MessageView extends javax.swing.JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 if (JOptionPane.showConfirmDialog(MessageView.this,
-                        "Do you want to leave chat?", "Leave chat?",
+                        "Mày muốn rời khỏi chát Ư?", "Leave chat?",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                     ClientRun.socketHandler.leaveChat(userChat);

@@ -187,7 +187,7 @@ public class ConnectServer extends javax.swing.JFrame {
         this.dispose();
         ClientRun.openScene(ClientRun.SceneName.LOGIN);
 
-        System.out.println("connect to server thanh cong");
+        System.out.println("Kết nối tới Server Thành công");
     }
 
     private void onFailed(String failedMsg) {

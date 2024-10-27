@@ -84,7 +84,8 @@
                   <Group type="102" attributes="0">
                       <Component id="btnStart" min="-2" pref="98" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lbWaiting" min="-2" pref="336" max="-2" attributes="0"/>
+                      <Component id="lbWaiting" min="-2" pref="288" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
                   <Component id="infoPLayer" min="-2" pref="451" max="-2" attributes="0"/>
               </Group>

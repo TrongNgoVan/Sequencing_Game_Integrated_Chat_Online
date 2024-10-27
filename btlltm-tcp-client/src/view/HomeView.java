@@ -385,10 +385,10 @@ public class HomeView extends javax.swing.JFrame {
                     ClientRun.socketHandler.inviteToPlay(userSelected);
                     break;
                 case "OFFLINE":
-                    JOptionPane.showMessageDialog(HomeView.this, "This user is offline." , "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(HomeView.this, "Người dùng này offline." , "ERROR", JOptionPane.ERROR_MESSAGE);
                     break;
                 case "INGAME":
-                    JOptionPane.showMessageDialog(HomeView.this, "This user is in game." , "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(HomeView.this, "Ngươì dùng này đang trong game." , "ERROR", JOptionPane.ERROR_MESSAGE);
                     break;
                 default:
                     JOptionPane.showMessageDialog(HomeView.this, "Unknown status." , "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -400,12 +400,12 @@ public class HomeView extends javax.swing.JFrame {
     private void btnMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMessageActionPerformed
         int row = tblUser.getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(HomeView.this, "You haven't chosen anyone yet! Please select one user." , "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(HomeView.this, "Mày phải chon vào một User." , "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             String userSelected = String.valueOf(tblUser.getValueAt(row, 0));
             System.out.println(userSelected);
             if (userSelected.equals(ClientRun.socketHandler.getLoginUser())) {
-                JOptionPane.showMessageDialog(HomeView.this, "You can not chat yourself." , "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(HomeView.this, "Mày không thể chat với chính mày." , "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                ClientRun.socketHandler.inviteToChat(userSelected);
             }
@@ -419,7 +419,7 @@ public class HomeView extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         JFrame frame = new JFrame("Logout");
-        if (JOptionPane.showConfirmDialog(frame, "Confirm if you want Logout", "Logout", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
+        if (JOptionPane.showConfirmDialog(frame, "Mày có chắc chắn muốn Đăng xuất", "Logout", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
             ClientRun.socketHandler.logout();
             
         } 
@@ -428,12 +428,12 @@ public class HomeView extends javax.swing.JFrame {
     private void btnGetInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetInfoActionPerformed
         int row = tblUser.getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(HomeView.this, "You haven't chosen anyone yet! Please select one user." , "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(HomeView.this, "Mày phải chọn vào một User" , "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             String userSelected = String.valueOf(tblUser.getValueAt(row, 0));
             System.out.println(userSelected);
             if (userSelected.equals(ClientRun.socketHandler.getLoginUser())) {
-                JOptionPane.showMessageDialog(HomeView.this, "You can not see yourself." , "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(HomeView.this, "Mày không thể xem chính mày." , "ERROR", JOptionPane.ERROR_MESSAGE);
             } else {
                ClientRun.socketHandler.getInfoUser(userSelected);
             }
@@ -442,7 +442,7 @@ public class HomeView extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         JFrame frame = new JFrame("EXIT");
-        if (JOptionPane.showConfirmDialog(frame, "Confirm if you want exit", "EXIT", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
+        if (JOptionPane.showConfirmDialog(frame, "Mày có chắc chắn muốn thoát", "EXIT", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
             ClientRun.socketHandler.close();
             System.exit(0);
         } 
