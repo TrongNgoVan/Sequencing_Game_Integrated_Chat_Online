@@ -12,6 +12,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import run.ClientRun;
 
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
 public class SocketHandler {
      
     Socket s;
@@ -32,7 +36,7 @@ public class SocketHandler {
             // establish the connection with server port 
             s = new Socket();
             s.connect(new InetSocketAddress(ip, port), 4000);
-            System.out.println("Connected to " + ip + ":" + port + ", localport:" + s.getLocalPort());
+            System.out.println("Đã kết nối tới " + ip + ":" + port + ", localport:" + s.getLocalPort());
 
             // obtaining input and output streams
             dis = new DataInputStream(s.getInputStream());
@@ -330,7 +334,7 @@ public class SocketHandler {
             JOptionPane.showMessageDialog(ClientRun.registerView, failedMsg, "Lỗi", JOptionPane.ERROR_MESSAGE);
 
         } else if (status.equals("success")) {
-            JOptionPane.showMessageDialog(ClientRun.registerView, "Register account successfully! Please login!");
+            JOptionPane.showMessageDialog(ClientRun.registerView, "Đăng ký thành công, vui lòng đăng nhập!");
             // chuyển scene
             ClientRun.closeScene(ClientRun.SceneName.REGISTER);
             ClientRun.openScene(ClientRun.SceneName.LOGIN);
@@ -413,7 +417,7 @@ public class SocketHandler {
         if (status.equals("success")) {
             String userHost = splitted[2];
             String userInvited = splitted[3];
-            if (JOptionPane.showConfirmDialog(ClientRun.homeView, userHost + " want to chat with you?", "Chat?", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
+            if (JOptionPane.showConfirmDialog(ClientRun.homeView, userHost + " Muốn nói gì đó với bạn?", "Chat?", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
                 ClientRun.openScene(ClientRun.SceneName.MESSAGEVIEW);
                 ClientRun.messageView.setInfoUserChat(userHost);
                 sendData("ACCEPT_MESSAGE;" + userHost + ";" + userInvited);
@@ -446,7 +450,7 @@ public class SocketHandler {
             String userHost = splitted[2];
             String userInvited = splitted[3];
                 
-            JOptionPane.showMessageDialog(ClientRun.homeView, userInvited + " don't want to chat with you!");
+            JOptionPane.showMessageDialog(ClientRun.homeView, userInvited + " không muốn trò chuyện với bạn!");
         }
     }
     
@@ -460,7 +464,7 @@ public class SocketHandler {
             String userInvited = splitted[3];
             
             ClientRun.closeScene(ClientRun.SceneName.MESSAGEVIEW);   
-            JOptionPane.showMessageDialog(ClientRun.homeView, userHost + " leave to chat!");
+            JOptionPane.showMessageDialog(ClientRun.homeView, userHost + " đã rời khỏi cuộc trò chuyện!");
         }
     }
     
@@ -489,7 +493,7 @@ public class SocketHandler {
             String userHost = splitted[2];
             String userInvited = splitted[3];
             String roomId = splitted[4];
-            if (JOptionPane.showConfirmDialog(ClientRun.homeView, userHost + " want to play game with you?", "Game?", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
+            if (JOptionPane.showConfirmDialog(ClientRun.homeView, userHost + " muốn chơi game với bạn?", "Game?", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
                 ClientRun.openScene(ClientRun.SceneName.GAMEVIEW);
                 ClientRun.gameView.setInfoPlayer(userHost);
                 roomIdPresent = roomId;
@@ -525,7 +529,7 @@ public class SocketHandler {
             String userHost = splitted[2];
             String userInvited = splitted[3];
                 
-            JOptionPane.showMessageDialog(ClientRun.homeView, userInvited + " don't want to play with you!");
+            JOptionPane.showMessageDialog(ClientRun.homeView, userInvited + " không muốn chơi với bạn!");
         }
     }
     
@@ -604,11 +608,11 @@ public class SocketHandler {
         if (status.equals("success")) {
             ClientRun.gameView.setWaitingRoom();
             if (result.equals("DRAW")) {
-                ClientRun.gameView.showAskPlayAgain("The game is draw. Do you want to play continue?");
+                ClientRun.gameView.showAskPlayAgain("Game hòa, bạn có muốn tiếp tục chơi không?");
             } else if (result.equals(loginUser)) {
-                ClientRun.gameView.showAskPlayAgain("You win. Do you want to play continue?");
+                ClientRun.gameView.showAskPlayAgain("Chúc mừng bạn đã thắng, muốn tiếp tục chứ?");
             } else {
-                ClientRun.gameView.showAskPlayAgain("You lose. Do you want to play continue?");
+                ClientRun.gameView.showAskPlayAgain("Rất tiếc bạn đã thua, tiếp tục chơi nữa không?");
             }
         }
     }
