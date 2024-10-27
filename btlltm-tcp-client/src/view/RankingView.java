@@ -223,7 +223,7 @@ public class RankingView extends javax.swing.JFrame {
         jDesktopPane2.setForeground(new java.awt.Color(204, 0, 0));
 
         jLabel2.setBackground(new java.awt.Color(204, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("   Hạng Nhì");
 
@@ -234,23 +234,23 @@ public class RankingView extends javax.swing.JFrame {
         jDesktopPane2Layout.setHorizontalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addGap(93, 93, 93)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         jDesktopPane2Layout.setVerticalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel2)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         rank2_name.setBackground(new java.awt.Color(255, 255, 255));
-        rank2_name.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        rank2_name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         rank2_diem.setBackground(new java.awt.Color(255, 255, 255));
-        rank2_diem.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        rank2_diem.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         jLayeredPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jDesktopPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -324,10 +324,10 @@ public class RankingView extends javax.swing.JFrame {
         );
 
         rank1_name.setBackground(new java.awt.Color(255, 255, 255));
-        rank1_name.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        rank1_name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         rank1_diem.setBackground(new java.awt.Color(255, 255, 255));
-        rank1_diem.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        rank1_diem.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -369,7 +369,7 @@ public class RankingView extends javax.swing.JFrame {
         jDesktopPane4.setForeground(new java.awt.Color(204, 0, 0));
 
         jLabel4.setBackground(new java.awt.Color(204, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Hạng Ba");
 
@@ -380,20 +380,22 @@ public class RankingView extends javax.swing.JFrame {
         jDesktopPane4Layout.setHorizontalGroup(
             jDesktopPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane4Layout.createSequentialGroup()
-                .addContainerGap(140, Short.MAX_VALUE)
+                .addContainerGap(126, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
+                .addGap(116, 116, 116))
         );
         jDesktopPane4Layout.setVerticalGroup(
             jDesktopPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane4Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane4Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         rank3_name.setBackground(new java.awt.Color(255, 255, 255));
-        rank3_name.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        rank3_name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        rank3_diem.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
         jLayeredPane2.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jDesktopPane4, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -425,7 +427,7 @@ public class RankingView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rank3_diem, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6))
-                .addGap(47, 47, 47)
+                .addGap(51, 51, 51)
                 .addComponent(jDesktopPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
