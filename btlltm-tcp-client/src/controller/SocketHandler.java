@@ -592,7 +592,7 @@ public class SocketHandler {
             String answer4d = splitted[22];
             ClientRun.gameView.setQuestion4(a4, answer4a, answer4b, answer4c, answer4d);
             
-            ClientRun.gameView.setStartGame(30);
+            ClientRun.gameView.setStartGame(20);
         }
     }
     
