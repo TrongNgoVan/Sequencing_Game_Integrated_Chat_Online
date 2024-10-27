@@ -42,7 +42,7 @@ public class Room {
     public void startGame() {
         gameStarted = true;
         
-        matchTimer = new CountDownTimer(31);
+        matchTimer = new CountDownTimer(20);
         matchTimer.setTimerCallBack(
             null,
             (Callable) () -> {
@@ -62,7 +62,7 @@ public class Room {
     }
     
     public void waitingClientTimer() {
-        waitingTimer = new CountDownTimer(12);
+        waitingTimer = new CountDownTimer(5);
         waitingTimer.setTimerCallBack(
             null,
             (Callable) () -> {

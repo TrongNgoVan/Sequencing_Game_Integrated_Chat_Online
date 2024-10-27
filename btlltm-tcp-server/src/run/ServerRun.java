@@ -108,7 +108,7 @@ public class ServerRun {
         try {
             int port = 8889;
             ss = new ServerSocket(port);
-            serverView.appendLog("Created Server at port " + port + ".");  // Ghi log vào ServerView
+            serverView.appendLog("Server được thiết lập ở cổng  " + port + ".");  // Ghi log vào ServerView
             
             // init managers
             clientManager = new ClientManager();
@@ -128,12 +128,12 @@ public class ServerRun {
                 try {
                     // socket object to receive incoming client requests
                     Socket s = ss.accept();
-                    serverView.appendLog("+ New Client connected: " + s);  // Ghi log kết nối mới
+                    serverView.appendLog("+ Một Client mới đã kết nối: " + s);  // Ghi log kết nối mới
 
                     // create new client runnable object
                     Client c = new Client(s);
                     clientManager.add(c);
-                    serverView.appendLog("Count of client online: " + clientManager.getSize());  // Ghi log số lượng client
+                    serverView.appendLog("Tổng số Client đang kết nối: " + clientManager.getSize());  // Ghi log số lượng client
                     // execute client runnable
                     executor.execute(c);
 
