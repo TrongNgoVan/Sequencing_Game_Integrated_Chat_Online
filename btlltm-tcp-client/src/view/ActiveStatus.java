@@ -6,7 +6,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
 public class ActiveStatus extends Component {
 
     public boolean isActive() {

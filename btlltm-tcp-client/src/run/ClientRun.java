@@ -11,7 +11,10 @@ import view.LoginView;
 import view.MessageView;
 import view.RegisterView;
 import view.RankingView;
-
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
 public class ClientRun {
     public enum SceneName {
         CONNECTSERVER,

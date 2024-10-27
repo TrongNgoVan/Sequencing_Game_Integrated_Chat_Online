@@ -14,7 +14,7 @@ import run.ClientRun;
 
 /**
  *
- * @author admin
+ * @author Ngọ Văn Trọng
  */
 public class HomeView extends javax.swing.JFrame {
     String statusCompetitor = "";

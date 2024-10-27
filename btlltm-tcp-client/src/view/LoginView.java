@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import run.ClientRun;
 /**
  *
- * @author admin
+ * @author Ngọ Văn Trọng
  */
 public class LoginView extends javax.swing.JFrame {
     /**

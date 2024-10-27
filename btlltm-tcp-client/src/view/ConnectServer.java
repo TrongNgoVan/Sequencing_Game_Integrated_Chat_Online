@@ -11,7 +11,7 @@ import run.ClientRun;
 
 /**
  *
- * @author admin
+ * @author Ngọ Văn Trọng
  */
 public class ConnectServer extends javax.swing.JFrame {
 

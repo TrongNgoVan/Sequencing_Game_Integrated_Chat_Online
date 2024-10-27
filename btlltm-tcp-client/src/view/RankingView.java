@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author MEDIAMART PHU SON
+ * @author Ngọ Văn Trọng
  */
 public class RankingView extends javax.swing.JFrame {
     

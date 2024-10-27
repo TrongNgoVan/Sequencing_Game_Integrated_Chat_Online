@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import run.ClientRun;
 /**
  *
- * @author admin
+ * @author Ngọ Văn Trọng
  */
 public class RegisterView extends javax.swing.JFrame {
     /**

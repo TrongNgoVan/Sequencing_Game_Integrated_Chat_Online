@@ -14,7 +14,10 @@ import java.awt.image.BufferedImage;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
 public class ImageAvatar extends JComponent {
 
     public Icon getImage() {

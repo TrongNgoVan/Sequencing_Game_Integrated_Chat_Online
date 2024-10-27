@@ -12,7 +12,7 @@ import run.ClientRun;
 
 /**
  *
- * @author admin
+ * @author Ngọ Văn Trọng
  */
 public class MessageView extends javax.swing.JFrame {
     String userChat = "";

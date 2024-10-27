@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author admin
+ * @author Ngọ Văn Trọng
  */
 public class InfoPlayerView extends javax.swing.JFrame {
 
