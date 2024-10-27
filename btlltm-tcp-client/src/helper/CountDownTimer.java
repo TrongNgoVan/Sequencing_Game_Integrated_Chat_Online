@@ -8,6 +8,11 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
+
 public class CountDownTimer {
     
     int timeLimit;
