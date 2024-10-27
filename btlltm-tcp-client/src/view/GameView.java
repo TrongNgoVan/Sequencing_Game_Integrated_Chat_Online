@@ -547,7 +547,7 @@ public class GameView extends javax.swing.JFrame {
         });
 
         lbWaiting.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbWaiting.setText("Waiting host start game....");
+        lbWaiting.setText("Chờ đối thủ (chủ  phòng) khởi động trò chơi...");
 
         panelPlayAgain.setBorder(javax.swing.BorderFactory.createTitledBorder("Question?"));
 
@@ -577,7 +577,7 @@ public class GameView extends javax.swing.JFrame {
 
         lbResult.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbResult.setForeground(new java.awt.Color(204, 0, 0));
-        lbResult.setText("Do you want to play again? ");
+        lbResult.setText("Bạn có muốn chơi lại không ? ");
 
         javax.swing.GroupLayout panelPlayAgainLayout = new javax.swing.GroupLayout(panelPlayAgain);
         panelPlayAgain.setLayout(panelPlayAgainLayout);
@@ -703,7 +703,7 @@ public class GameView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLeaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaveGameActionPerformed
-        if (JOptionPane.showConfirmDialog(GameView.this, "Are you sure want to leave game? You will lose?", "LEAVE GAME", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
+        if (JOptionPane.showConfirmDialog(GameView.this, "Nếu rời khỏi Game, bạn sẽ thua?", "LEAVE GAME", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
             ClientRun.socketHandler.leaveGame(competitor);
             ClientRun.socketHandler.setRoomIdPresent(null);
             dispose();
