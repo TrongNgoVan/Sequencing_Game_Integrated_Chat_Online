@@ -55,7 +55,7 @@ public class GameView extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                if (JOptionPane.showConfirmDialog(GameView.this, "Are you sure want to leave game? You will lose?", "LEAVE GAME", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
+                if (JOptionPane.showConfirmDialog(GameView.this, "Nếu rời khỏi thì chắc chắn bạn sẽ thua?", "LEAVE GAME", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION){
                     ClientRun.socketHandler.leaveGame(competitor);
                     ClientRun.socketHandler.setRoomIdPresent(null);
                     dispose();
@@ -178,7 +178,7 @@ public class GameView extends javax.swing.JFrame {
     }
     
     public void waitingReplyClient () {
-        waitingClientTimer = new CountDownTimer(10);
+        waitingClientTimer = new CountDownTimer(5);
         waitingClientTimer.setTimerCallBack(
                 null,
                 (Callable) () -> {
