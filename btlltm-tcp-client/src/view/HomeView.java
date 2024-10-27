@@ -116,7 +116,7 @@ public class HomeView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "User Online"
+                "Online"
             }
         ) {
             Class[] types = new Class [] {
