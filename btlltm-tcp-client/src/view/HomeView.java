@@ -372,7 +372,7 @@ public class HomeView extends javax.swing.JFrame {
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         int row = tblUser.getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(HomeView.this, "You haven't chosen anyone yet! Please select one user." , "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(HomeView.this, "Mày phải chọn một người dùng." , "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             String userSelected = String.valueOf(tblUser.getValueAt(row, 0));
 
