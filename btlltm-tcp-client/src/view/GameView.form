@@ -63,8 +63,10 @@
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="644" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" pref="73" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="450" max="-2" attributes="0"/>
+                              <Component id="jLabel4" min="-2" pref="162" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" pref="84" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -89,8 +91,6 @@
                   </Group>
                   <Component id="infoPLayer" min="-2" pref="451" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel4" min="-2" pref="162" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="btnLeaveGame" min="-2" pref="121" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>

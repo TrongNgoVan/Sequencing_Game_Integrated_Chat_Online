@@ -390,9 +390,7 @@ public class HomeView extends javax.swing.JFrame {
                 case "INGAME":
                     JOptionPane.showMessageDialog(HomeView.this, "Ngươì dùng này đang trong game." , "ERROR", JOptionPane.ERROR_MESSAGE);
                     break;
-                default:
-                    JOptionPane.showMessageDialog(HomeView.this, "Unknown status." , "ERROR", JOptionPane.ERROR_MESSAGE);
-                    break;
+              
             }
         }
     }//GEN-LAST:event_btnPlayActionPerformed
