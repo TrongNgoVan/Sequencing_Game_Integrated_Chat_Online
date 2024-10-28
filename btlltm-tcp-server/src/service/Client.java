@@ -175,6 +175,7 @@ public class Client implements Runnable {
         
         // send result
         sendData("LOGIN" + ";" + result);
+    
         onReceiveGetListOnline();
     }
     
