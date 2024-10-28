@@ -187,6 +187,7 @@ public class SocketHandler {
         sendData("GET_LIST_ONLINE");
     }
     
+    
     public void getInfoUser(String username) {
         sendData("GET_INFO_USER;" + username);
     }
@@ -313,6 +314,7 @@ public class SocketHandler {
             // lưu user login
             this.loginUser = splitted[2];
             this.score = Float.parseFloat(splitted[3]) ;
+           
             // chuyển scene
             ClientRun.closeScene(ClientRun.SceneName.LOGIN);
             ClientRun.openScene(ClientRun.SceneName.HOMEVIEW);
@@ -349,9 +351,9 @@ public class SocketHandler {
         if (status.equals("success")) {
             int userCount = Integer.parseInt(splitted[2]);
 
-            // https://niithanoi.edu.vn/huong-dan-thao-tac-voi-jtable-lap-trinh-java-swing.html
+           
             Vector vheader = new Vector();
-            vheader.add("User");
+            vheader.add("Online");
 
             Vector vdata = new Vector();
             if (userCount > 1) {
