@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package service;
 
 import controller.UserController;
@@ -175,7 +170,6 @@ public class Client implements Runnable {
         
         // send result
         sendData("LOGIN" + ";" + result);
-    
         onReceiveGetListOnline();
     }
     
@@ -500,6 +494,5 @@ public class Client implements Runnable {
     public void setJoinedRoom(Room joinedRoom) {
         this.joinedRoom = joinedRoom;
     }
-    
     
 }

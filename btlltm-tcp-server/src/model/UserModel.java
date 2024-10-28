@@ -32,6 +32,7 @@ public class UserModel implements Serializable {
         this.userName = userName;
         this.password = password;
         this.score = score;
+        
     }
     
     public UserModel(String userName, String password, String status, float score) {
@@ -40,6 +41,17 @@ public class UserModel implements Serializable {
         this.password = password;
         this.status = status;
         this.score = score;
+    }
+     public UserModel(String userName, String password, float score, int win, int draw, int lose, float avgTime) {
+    	super();
+        this.userName = userName;
+        this.password = password;
+       
+        this.score = score;
+        this.win = win;
+        this.draw = draw;
+        this.lose = lose;
+        this.avgTime = avgTime;
     }
     
     public String getUserName() {

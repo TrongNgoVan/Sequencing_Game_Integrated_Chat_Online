@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.sql.Connection;
@@ -23,7 +18,7 @@ public class UserController {
     
     private final String CHECK_USER = "SELECT userId from users WHERE username = ? limit 1";
     
-    private final String LOGIN_USER = "SELECT username, password, score FROM users WHERE username=? AND password=?";
+    private final String LOGIN_USER = "SELECT * FROM users WHERE username=? AND password=?";
     
     private final String GET_INFO_USER = "SELECT username, password, score, win, draw, lose, avgCompetitor, avgTime FROM users WHERE username=?";
     
@@ -74,10 +69,10 @@ public class UserController {
             if (r.first()) {
                 float score = r.getFloat("score");
                 int win = r.getInt("win");
-                int draw = r.getInt("win");
+                int draw = r.getInt("draw");
                 int lose = r.getInt("lose");
-                float timewin = r.getFloat("avgTime");
-                return "success;" + username + ";" + score + ";" + win + ";" + draw + ";" + lose ;
+                float avgTime = r.getFloat("avgTime");
+                return "success;" + username + ";" + score + ";" + win + ";" + draw +";" + lose + ";" + avgTime;
             } else {
                 return "failed;" + "Mày hãy điền đúng tài khoản và mật khẩu";
             }
@@ -190,14 +185,18 @@ public class UserController {
    
     public static void main(String[] args) {
         // Tạo một đối tượng UserController
+         String username = "Ngọ Văn Trọng"; // Thay bằng tên tài khoản để kiểm tra
+        String password = "123"; // Thay bằng mật khẩu để kiểm tra
+
         UserController userController = new UserController();
+        String result = userController.login(username, password);
 
-        // Gọi hàm getRanking() để lấy danh sách xếp hạng
-        String ranking = userController.getRanking();
-
-        // In ra kết quả của bảng xếp hạng
-        System.out.println("===== BẢNG XẾP HẠNG NGƯỜI CHƠI =====");
-        System.out.println(ranking);
+        // In kết quả ra console để kiểm tra
+        if (result != null) {
+            System.out.println("Kết quả đăng nhập: " + result);
+        } else {
+            System.out.println("Có lỗi xảy ra trong quá trình đăng nhập.");
+        }
     }
 
 
