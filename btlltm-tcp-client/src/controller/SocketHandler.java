@@ -1,3 +1,4 @@
+
 package controller;
 
 import java.io.DataInputStream;
@@ -26,9 +27,12 @@ public class SocketHandler {
     String roomIdPresent = null; // lưu room hiện tại
     float score = 0;
     int win =0;
-    int draw = 0; 
+    int draw = 0;
     int lose = 0;
-    float avgTime = 0;
+    float avgTime =0;
+    float avgCompetitor = 0;
+    
+    
     Thread listener = null;
 
     public String connect(String addr, int port) {
@@ -320,21 +324,19 @@ public class SocketHandler {
             this.win = Integer.parseInt(splitted[4]);
             this.draw = Integer.parseInt(splitted[5]);
             this.lose = Integer.parseInt(splitted[6]);
-            this.avgTime = Float.parseFloat(splitted[7]);
-
+            this.avgTime = Float.parseFloat(splitted[7]) ;
+           
             // chuyển scene
             ClientRun.closeScene(ClientRun.SceneName.LOGIN);
             ClientRun.openScene(ClientRun.SceneName.HOMEVIEW);
 
             // auto set info user
-            ClientRun.homeView.setUserName(loginUser);
+            ClientRun.homeView.setUsername(loginUser);
             ClientRun.homeView.setUserScore(score);
             ClientRun.homeView.setUserWin(win);
             ClientRun.homeView.setUserDraw(draw);
             ClientRun.homeView.setUserLose(lose);
-            ClientRun.homeView.setUserWin(win);
-            
-            
+            ClientRun.homeView.setUserTime(avgTime);
         }
     }
     
@@ -682,5 +684,43 @@ public class SocketHandler {
     public void setScore(float score) {
         this.score = score;
     }
-    
+     public int getWin() {
+        return win;
+    }
+
+    public void setWin(int win) {
+        this.win = win;
+    }
+
+    public int getDraw() {
+        return draw;
+    }
+
+    public void setDraw(int draw) {
+        this.draw = draw;
+    }
+
+    public int getLose() {
+        return lose;
+    }
+
+    public void setLose(int lose) {
+        this.lose = lose;
+    }
+
+    public float getAvgCompetitor() {
+        return avgCompetitor;
+    }
+
+    public void setAvgCompetitor(float avgCompetitor) {
+        this.avgCompetitor = avgCompetitor;
+    }
+
+    public float getAvgTime() {
+        return avgTime;
+    }
+
+    public void setAvgTime(float avgTime) {
+        this.avgTime = avgTime;
+    }
 }
