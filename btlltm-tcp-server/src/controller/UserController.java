@@ -73,7 +73,11 @@ public class UserController {
             
             if (r.first()) {
                 float score = r.getFloat("score");
-                return "success;" + username + ";" + score;
+                int win = r.getInt("win");
+                int draw = r.getInt("win");
+                int lose = r.getInt("lose");
+                float timewin = r.getFloat("avgTime");
+                return "success;" + username + ";" + score + ";" + win + ";" + draw + ";" + lose ;
             } else {
                 return "failed;" + "Mày hãy điền đúng tài khoản và mật khẩu";
             }
