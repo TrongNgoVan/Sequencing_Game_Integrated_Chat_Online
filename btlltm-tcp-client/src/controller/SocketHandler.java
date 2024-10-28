@@ -25,7 +25,10 @@ public class SocketHandler {
     String loginUser = null; // lưu tài khoản đăng nhập hiện tại
     String roomIdPresent = null; // lưu room hiện tại
     float score = 0;
-    
+    int win =0;
+    int draw = 0; 
+    int lose = 0;
+    float avgTime = 0;
     Thread listener = null;
 
     public String connect(String addr, int port) {
@@ -314,14 +317,24 @@ public class SocketHandler {
             // lưu user login
             this.loginUser = splitted[2];
             this.score = Float.parseFloat(splitted[3]) ;
-           
+            this.win = Integer.parseInt(splitted[4]);
+            this.draw = Integer.parseInt(splitted[5]);
+            this.lose = Integer.parseInt(splitted[6]);
+            this.avgTime = Float.parseFloat(splitted[7]);
+
             // chuyển scene
             ClientRun.closeScene(ClientRun.SceneName.LOGIN);
             ClientRun.openScene(ClientRun.SceneName.HOMEVIEW);
 
             // auto set info user
-            ClientRun.homeView.setUsername(loginUser);
+            ClientRun.homeView.setUserName(loginUser);
             ClientRun.homeView.setUserScore(score);
+            ClientRun.homeView.setUserWin(win);
+            ClientRun.homeView.setUserDraw(draw);
+            ClientRun.homeView.setUserLose(lose);
+            ClientRun.homeView.setUserWin(win);
+            
+            
         }
     }
     
