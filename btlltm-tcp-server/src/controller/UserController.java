@@ -28,6 +28,10 @@ public class UserController {
     private final String GET_INFO_USER = "SELECT username, password, score, win, draw, lose, avgCompetitor, avgTime FROM users WHERE username=?";
     
     private final String UPDATE_USER = "UPDATE users SET score = ?, win = ?, draw = ?, lose = ?, avgCompetitor = ?, avgTime = ? WHERE username=?";
+    
+    private final String GET_RANKING = "SELECT username, score, win, lose, avgCompetitor, avgTime FROM users ORDER BY score DESC, win DESC, lose ASC";
+
+
     //  Instance
     private final Connection con;
     
@@ -79,27 +83,36 @@ public class UserController {
     }
     
     public String getInfoUser(String username) {
-        UserModel user = new UserModel();
-        try {
-            PreparedStatement p = con.prepareStatement(GET_INFO_USER);
-            p.setString(1, username);
-            
-            ResultSet r = p.executeQuery();
-            while(r.next()) {
-                user.setUserName(r.getString("username"));
-                user.setScore(r.getFloat("score"));
-                user.setWin(r.getInt("win"));
-                user.setDraw(r.getInt("draw"));
-                user.setLose(r.getInt("lose"));
-                user.setAvgCompetitor(r.getFloat("avgCompetitor"));
-                user.setAvgTime(r.getFloat("avgTime"));
-            }
-            return "success;" + user.getUserName() + ";" + user.getScore() + ";" + user.getWin() + ";" + user.getDraw() + ";" + user.getLose() + ";" + user.getAvgCompetitor() + ";" + user.getAvgTime() ;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }   
-        return null;
-    }
+    UserModel user = new UserModel();
+    try {
+        PreparedStatement p = con.prepareStatement(GET_INFO_USER);
+        p.setString(1, username);
+        
+        ResultSet r = p.executeQuery();
+        while (r.next()) {
+            user.setUserName(r.getString("username"));
+            user.setScore(r.getFloat("score"));
+            user.setWin(r.getInt("win"));
+            user.setDraw(r.getInt("draw"));
+            user.setLose(r.getInt("lose"));
+            user.setAvgCompetitor(r.getFloat("avgCompetitor"));
+            user.setAvgTime(r.getFloat("avgTime"));
+        }
+
+        // Sử dụng String.format để định dạng số với 2 chữ số sau dấu phẩy
+        return "success;" + user.getUserName() + ";" + 
+               String.format("%.2f", user.getScore()) + ";" + 
+               user.getWin() + ";" + 
+               user.getDraw() + ";" + 
+               user.getLose() + ";" + 
+               String.format("%.2f", user.getAvgCompetitor()) + ";" + 
+               String.format("%.2f", user.getAvgTime());
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }   
+    return null;
+}
+
     
     public boolean updateUser(UserModel user) throws SQLException {
         boolean rowUpdated;
@@ -140,34 +153,35 @@ public class UserController {
         }   
         return null;
     }
-        private final String GET_RANKING = "SELECT username, score, avgCompetitor, avgTime FROM users ORDER BY score DESC, avgCompetitor DESC, avgTime ASC";
-        public String getRanking() {
-        StringBuilder ranking = new StringBuilder();
-        try {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(GET_RANKING);
+      
+      public String getRanking() {
+    StringBuilder ranking = new StringBuilder();
+    try {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(GET_RANKING);
 
-            ranking.append("Rank\tUsername\tScore\tAvg Competitor\tAvg Time\n");
-            int rank = 1;
-            while (rs.next()) {
-                String username = rs.getString("username");
-                float score = rs.getFloat("score");
-                float avgCompetitor = rs.getFloat("avgCompetitor");
-                float avgTime = rs.getFloat("avgTime");
+        ranking.append("Rank\tUsername\tScore\tWin\tLose\n");
+        int rank = 1;
+        while (rs.next()) {
+            String username = rs.getString("username");
+            float score = rs.getFloat("score");
+            int win = rs.getInt("win");
+            int lose = rs.getInt("lose");
 
-                ranking.append(rank).append("\t")
-                       .append(username).append("\t")
-                       .append(score).append("\t")
-                       .append(avgCompetitor).append("\t")
-                       .append(avgTime).append("\n");
-                rank++;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            ranking.append(rank).append("\t")
+                   .append(username).append("\t")
+                   .append(score).append("\t")
+                   .append(win).append("\t")
+                   .append(lose).append("\n");
+            rank++;
         }
-        return "success;" + ranking.toString();
+
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return "success;" + ranking.toString();
+}
+
         
    
     public static void main(String[] args) {

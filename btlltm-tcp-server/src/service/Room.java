@@ -65,7 +65,7 @@ public class Room {
     }
     
     public void waitingClientTimer() {
-        waitingTimer = new CountDownTimer(5);
+        waitingTimer = new CountDownTimer(10);
         waitingTimer.setTimerCallBack(
             null,
             (Callable) () -> {
