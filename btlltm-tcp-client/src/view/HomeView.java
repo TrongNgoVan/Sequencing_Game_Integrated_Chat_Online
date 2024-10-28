@@ -51,21 +51,26 @@ public class HomeView extends javax.swing.JFrame {
     public void setUsername(String username) {
         infoUsername.setText( username);
     }
-    public void setUserWin(int win){
-        inforWin.setText("Win: "+win);
-    }
-    public void setUserDraw(int draw){
-        inforDraw.setText("Draw: "+ draw);
-    }
-    public void setUserLose(int lose){
-        inforLose.setText("Lose: "+lose);
-    }
-    public void setUserTime(float avgTime){
-        inforTime.setText("Lose: "+ avgTime);
-    }
-   public void setUserScore(float score) {
-    infoUserScore.setText("Score: "+score);
+   public void setUserWin(int win) {
+    inforWin.setText(String.valueOf(win));
 }
+
+public void setUserDraw(int draw) {
+    inforDraw.setText(String.valueOf(draw));
+}
+
+public void setUserLose(int lose) {
+    inforLose.setText(String.valueOf(lose));
+}
+
+public void setUserTime(float avgTime) {
+    inforTime.setText(String.format("%.2f", avgTime));
+}
+
+public void setUserScore(float score) {
+    infoUserScore.setText(String.valueOf(score));
+}
+
 
 
     /**
@@ -192,9 +197,10 @@ public class HomeView extends javax.swing.JFrame {
         jDesktopPane2.setBackground(new java.awt.Color(204, 0, 0));
         jDesktopPane2.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnLogout.setBackground(new java.awt.Color(204, 0, 0));
+        btnLogout.setBackground(new java.awt.Color(153, 0, 0));
         btnLogout.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(204, 255, 255));
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/logout.png"))); // NOI18N
         btnLogout.setText("Logout");
         btnLogout.setBorder(null);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -203,9 +209,10 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
-        btnGetRanking.setBackground(new java.awt.Color(204, 0, 0));
+        btnGetRanking.setBackground(new java.awt.Color(153, 0, 0));
         btnGetRanking.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnGetRanking.setForeground(new java.awt.Color(255, 255, 255));
+        btnGetRanking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/top-three.png"))); // NOI18N
         btnGetRanking.setText("Ranking");
         btnGetRanking.setBorder(null);
         btnGetRanking.addActionListener(new java.awt.event.ActionListener() {
@@ -219,33 +226,37 @@ public class HomeView extends javax.swing.JFrame {
 
         infoUsername.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         infoUsername.setForeground(new java.awt.Color(255, 255, 255));
-        infoUsername.setText("   ");
+        infoUsername.setText("      Name");
 
         infoUserScore.setBackground(new java.awt.Color(204, 0, 0));
-        infoUserScore.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        infoUserScore.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         infoUserScore.setForeground(new java.awt.Color(255, 255, 255));
         infoUserScore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/scoreboard.png"))); // NOI18N
+        infoUserScore.setText("         Score");
 
         inforWin.setBackground(new java.awt.Color(204, 0, 0));
-        inforWin.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        inforWin.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         inforWin.setForeground(new java.awt.Color(255, 255, 255));
         inforWin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/prize.png"))); // NOI18N
+        inforWin.setText("         Win");
 
         inforDraw.setBackground(new java.awt.Color(204, 0, 0));
-        inforDraw.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        inforDraw.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         inforDraw.setForeground(new java.awt.Color(255, 255, 255));
         inforDraw.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/draw.png"))); // NOI18N
-        inforDraw.setText("  ");
+        inforDraw.setText("         Draw");
 
         inforLose.setBackground(new java.awt.Color(204, 0, 0));
-        inforLose.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        inforLose.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         inforLose.setForeground(new java.awt.Color(255, 255, 255));
         inforLose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/lose.png"))); // NOI18N
+        inforLose.setText("         Lose");
 
         inforTime.setBackground(new java.awt.Color(204, 0, 0));
-        inforTime.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        inforTime.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         inforTime.setForeground(new java.awt.Color(255, 255, 255));
         inforTime.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/trophy.png"))); // NOI18N
+        inforTime.setText("       TimeWin");
 
         jDesktopPane2.setLayer(btnLogout, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(btnGetRanking, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -267,13 +278,7 @@ public class HomeView extends javax.swing.JFrame {
                 .addContainerGap(70, Short.MAX_VALUE))
             .addGroup(jDesktopPane2Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGetRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addComponent(infoUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(infoUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jDesktopPane2Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,6 +292,12 @@ public class HomeView extends javax.swing.JFrame {
                             .addComponent(inforWin, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(inforTime, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGetRanking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jDesktopPane2Layout.setVerticalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,9 +317,11 @@ public class HomeView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(inforTime, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGetRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnGetRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
