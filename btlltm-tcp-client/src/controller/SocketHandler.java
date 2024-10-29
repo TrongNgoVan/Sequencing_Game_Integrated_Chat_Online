@@ -17,6 +17,9 @@ import run.ClientRun;
  *
  * @author Ngọ Văn Trọng
  */
+// Luồng chung của hệ thống: SocketHandler, có các phương thức listen để lắng nghe và received để nhận kết quả từ Server.
+// phương thức còn lại để gửi dữ liệu lên Server.
+
 public class SocketHandler {
      
     Socket s;
