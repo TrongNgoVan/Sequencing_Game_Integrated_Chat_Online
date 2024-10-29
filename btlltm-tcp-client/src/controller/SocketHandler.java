@@ -204,7 +204,9 @@ public class SocketHandler {
      public void getRanking(){
         sendData("GET_RANKING");
     }
-    
+     public void getHistory(String user) {
+         sendData("GET_HISTORY;" + user);
+    }
     public void checkStatusUser(String username) {
         sendData("CHECK_STATUS_USER;" + username);
     }
@@ -726,4 +728,6 @@ public class SocketHandler {
     public void setAvgTime(float avgTime) {
         this.avgTime = avgTime;
     }
+
+   
 }
