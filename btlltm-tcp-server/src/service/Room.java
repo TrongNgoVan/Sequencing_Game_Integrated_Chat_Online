@@ -1,5 +1,6 @@
 package service;
 
+import controller.MatchsController;
 import controller.UserController;
 import helper.CountDownTimer;
 import helper.CustumDateTimeFormatter;
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
+import model.Matchs;
 import model.UserModel;
 import run.ServerRun;
 /**
@@ -24,8 +26,8 @@ public class Room {
     CountDownTimer matchTimer;
     CountDownTimer waitingTimer;
     
-    String resultClient1;
-    String resultClient2;
+    String resultClient1 = null;
+    String resultClient2 = null;
     
     String playAgainC1;
     String playAgainC2;
@@ -55,7 +57,26 @@ public class Room {
                     waitingClientTimer();
                     if (resultClient1 == null && resultClient2 == null) {
                         draw();
-                        broadcast("RESULT_GAME;success;DRAW;" + client1.getLoginUser() + ";" + client2.getLoginUser() + ";" + id);
+                        String result = "RESULT_GAME;success;DRAW;" + client1.getLoginUser() + ";" + client2.getLoginUser() + ";" + id ;
+                        broadcast(result);
+                       
+                        System.out.println("Đã gửi cho Client: ");
+                        System.out.println(result);
+
+                      
+                        Matchs match = new Matchs();
+                        match.setId_match(id); 
+                        match.setUser1(client1.getLoginUser());
+                        match.setUser2(client2.getLoginUser());          
+                        match.setUser_win("DRAW");
+                        match.setScore_win(0.5f);
+                        match.setScore_lose(0.5f);
+                        
+
+                        match.setTime_begin(LocalDateTime.now());
+
+
+                         new MatchsController().addMatch(match);
                     } 
                 }
                 return null;
