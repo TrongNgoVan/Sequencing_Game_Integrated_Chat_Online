@@ -1,4 +1,8 @@
 package model;
+/**
+ *
+ * @author Ngọ Văn Trọng
+ */
 
 import java.time.LocalDateTime;
 
@@ -20,6 +24,10 @@ public class Matchs {
         this.score_win = score_win;
         this.time_begin = time_begin;
         this.score_lose = score_lose;
+    }
+
+    public Matchs() {
+       
     }
 
     // Getters and Setters

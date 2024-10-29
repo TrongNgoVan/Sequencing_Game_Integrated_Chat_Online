@@ -11,6 +11,9 @@ import java.util.logging.Logger;
 import run.ServerRun;
 import helper.Question;
 import java.sql.SQLException;
+import model.Matchs;
+import controller.MatchsController;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -397,32 +400,63 @@ public class Client implements Runnable {
         joinedRoom.startGame();
     } 
     
-    private void onReceiveSubmitResult(String received) throws SQLException {
-        String[] splitted = received.split(";");
-        String user1 = splitted[1];
-        String user2 = splitted[2];
-        String roomId = splitted[3];
-        
-        if (user1.equals(joinedRoom.getClient1().getLoginUser())) {
-            joinedRoom.setResultClient1(received);
-        } else if (user1.equals(joinedRoom.getClient2().getLoginUser())) {
-            joinedRoom.setResultClient2(received);
+  private void onReceiveSubmitResult(String received) throws SQLException {
+    // Kiểm tra và phân tích chuỗi nhận được
+    String[] splitted = received.split(";");
+    String user1 = splitted[1];
+    String user2 = splitted[2];
+    String roomId = splitted[3];
+    
+    if (joinedRoom == null || joinedRoom.getClient1() == null || joinedRoom.getClient2() == null) {
+        throw new IllegalStateException("Joined room or clients are not properly initialized.");
+    }
+
+    if (user1.equals(joinedRoom.getClient1().getLoginUser())) {
+        joinedRoom.setResultClient1(received);
+    } else if (user1.equals(joinedRoom.getClient2().getLoginUser())) {
+        joinedRoom.setResultClient2(received);
+    }
+
+    while (!"00:00".equals(joinedRoom.getTime()) && joinedRoom.getTime() != null) {
+        System.out.println(joinedRoom.getTime());
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        while (!joinedRoom.getTime().equals("00:00") && joinedRoom.getTime() != null) {
-            System.out.println(joinedRoom.getTime());
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } 
-        
-        String data = "RESULT_GAME;success;" + joinedRoom.handleResultClient() 
-                + ";" + joinedRoom.getClient1().getLoginUser() + ";" + joinedRoom.getClient2().getLoginUser() + ";" + joinedRoom.getId();
-        System.out.println(data);
-        joinedRoom.broadcast(data);
-    } 
+    }
+
+    String result = joinedRoom.handleResultClient();
+    String data = "RESULT_GAME;success;" + result
+            + ";" + joinedRoom.getClient1().getLoginUser() 
+            + ";" + joinedRoom.getClient2().getLoginUser() 
+            + ";" + joinedRoom.getId();
+    System.out.println(data);
+    joinedRoom.broadcast(data);
+
+    // Tạo đối tượng Matchs và gán các giá trị
+    Matchs match = new Matchs();
+    match.setId_match(roomId); 
+    match.setUser1(user1);
+    match.setUser2(user2);
+
+    // Xác định người thắng hoặc hòa
+    if (!"DRAW".equals(result)) {
+        match.setUser_win(result); 
+        match.setScore_win(1.0f);
+        match.setScore_lose(0.0f);
+    } else {
+        match.setUser_win("DRAW");
+        match.setScore_win(0.5f);
+        match.setScore_lose(0.5f);
+    }
+
+    match.setTime_begin(LocalDateTime.now());
+
+    
+     new MatchsController().addMatch(match);
+}
+
     
     private void onReceiveAskPlayAgain(String received) throws SQLException {
         String[] splitted = received.split(";");
