@@ -65,7 +65,7 @@ public class MatchsController {
     }
 
     // Lấy lịch sử trận đấu theo tên người dùng
-    public List<Matchs> getMatchHistoryByUser(String username) throws SQLException {
+    public List<Matchs> getHistory(String username) throws SQLException {
         List<Matchs> matches = new ArrayList<>();
         String sql = "SELECT * FROM matchs WHERE user1 = ? OR user2 = ? ORDER BY time_begin DESC";
         try (PreparedStatement stmt = con.prepareStatement(sql)) {

@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import model.Matchs;
 import controller.MatchsController;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *
@@ -116,7 +117,9 @@ public class Client implements Runnable {
                     case "ASK_PLAY_AGAIN":
                         onReceiveAskPlayAgain(received);
                         break;
-                        
+                    case "GET_HISTORY":
+                        onReceiveGetHistory(received);
+                        break;
                     case "EXIT":
                         running = false;
                 }
@@ -187,6 +190,12 @@ public class Client implements Runnable {
 
         // send result
         sendData("REGISTER" + ";" + result);
+    }
+    private void onReceiveGetHistory(String received) throws SQLException{
+      String[] splited = received.split(";");
+      String user = splited[1];
+      List<Matchs> result = new MatchsController().getHistory(user);
+      sendData("GET_HISTORY" + ";" + result) ;
     }
     
     private void onReceiveGetListOnline() {

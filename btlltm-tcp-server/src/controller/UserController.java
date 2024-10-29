@@ -111,7 +111,7 @@ public class UserController {
     }   
     return null;
 }
-
+  
     
     public boolean updateUser(UserModel user) throws SQLException {
         boolean rowUpdated;
