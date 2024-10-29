@@ -52,23 +52,23 @@ public class HomeView extends javax.swing.JFrame {
         infoUsername.setText( username);
     }
    public void setUserWin(int win) {
-    inforWin.setText(String.valueOf(win));
+    inforWin.setText("  Win: "+win);
 }
 
 public void setUserDraw(int draw) {
-    inforDraw.setText(String.valueOf(draw));
+    inforDraw.setText("  Draw: "+ draw);
 }
 
 public void setUserLose(int lose) {
-    inforLose.setText(String.valueOf(lose));
+    inforLose.setText("  Lose: " + lose);
 }
 
 public void setUserTime(float avgTime) {
-    inforTime.setText(String.format("%.2f", avgTime));
+    inforTime.setText("  TimeWin: " + String.format("%.2f", avgTime));
 }
 
 public void setUserScore(float score) {
-    infoUserScore.setText(String.valueOf(score));
+    infoUserScore.setText("  Score: " + score);
 }
 
 
