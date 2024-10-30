@@ -111,7 +111,7 @@ public class UserController {
     }   
     return null;
 }
-
+  
     
     public boolean updateUser(UserModel user) throws SQLException {
         boolean rowUpdated;
@@ -153,7 +153,7 @@ public class UserController {
         return null;
     }
       
-      public String getRanking() {
+   public String getRanking() {
     StringBuilder ranking = new StringBuilder();
     try {
         Statement stmt = con.createStatement();

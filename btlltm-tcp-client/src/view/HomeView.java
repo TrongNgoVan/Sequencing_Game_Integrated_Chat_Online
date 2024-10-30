@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.SocketHandler;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -18,6 +19,7 @@ import run.ClientRun;
  */
 public class HomeView extends javax.swing.JFrame {
     String statusCompetitor = "";
+    String user;
     /**
      * Creates new form HomeView
      */
@@ -49,26 +51,27 @@ public class HomeView extends javax.swing.JFrame {
     }
     
     public void setUsername(String username) {
+        user = username;
         infoUsername.setText( username);
     }
    public void setUserWin(int win) {
-    inforWin.setText(String.valueOf(win));
+    inforWin.setText("  Win: "+win);
 }
 
 public void setUserDraw(int draw) {
-    inforDraw.setText(String.valueOf(draw));
+    inforDraw.setText("  Draw: "+ draw);
 }
 
 public void setUserLose(int lose) {
-    inforLose.setText(String.valueOf(lose));
+    inforLose.setText("  Lose: " + lose);
 }
 
 public void setUserTime(float avgTime) {
-    inforTime.setText(String.format("%.2f", avgTime));
+    inforTime.setText("  TimeWin: " + String.format("%.2f", avgTime));
 }
 
 public void setUserScore(float score) {
-    infoUserScore.setText(String.valueOf(score));
+    infoUserScore.setText("  Score: " + score);
 }
 
 
@@ -98,6 +101,7 @@ public void setUserScore(float score) {
         inforDraw = new javax.swing.JLabel();
         inforLose = new javax.swing.JLabel();
         inforTime = new javax.swing.JLabel();
+        btnGetHistory = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -258,6 +262,18 @@ public void setUserScore(float score) {
         inforTime.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/trophy.png"))); // NOI18N
         inforTime.setText("       TimeWin");
 
+        btnGetHistory.setBackground(new java.awt.Color(153, 0, 0));
+        btnGetHistory.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnGetHistory.setForeground(new java.awt.Color(255, 255, 255));
+        btnGetHistory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/swords.png"))); // NOI18N
+        btnGetHistory.setText("History");
+        btnGetHistory.setBorder(null);
+        btnGetHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGetHistoryActionPerformed(evt);
+            }
+        });
+
         jDesktopPane2.setLayer(btnLogout, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(btnGetRanking, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(imageAvatar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -267,15 +283,12 @@ public void setUserScore(float score) {
         jDesktopPane2.setLayer(inforDraw, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(inforLose, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(inforTime, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane2.setLayer(btnGetHistory, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
         jDesktopPane2.setLayout(jDesktopPane2Layout);
         jDesktopPane2Layout.setHorizontalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
             .addGroup(jDesktopPane2Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(infoUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -291,12 +304,23 @@ public void setUserScore(float score) {
                             .addComponent(inforDraw, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(inforWin, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(inforTime, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 25, Short.MAX_VALUE))))
             .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnGetRanking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(btnGetHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGetRanking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                                .addGap(80, 80, 80)
+                                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jDesktopPane2Layout.setVerticalGroup(
@@ -314,15 +338,15 @@ public void setUserScore(float score) {
                 .addComponent(inforDraw, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(inforLose, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addComponent(inforTime, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnGetRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGetHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGetRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8))
         );
 
         btnExit.setBackground(new java.awt.Color(204, 0, 0));
@@ -408,7 +432,7 @@ public void setUserScore(float score) {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPlay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -512,6 +536,10 @@ public void setUserScore(float score) {
             
     
     }//GEN-LAST:event_btnGetRankingActionPerformed
+
+    private void btnGetHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetHistoryActionPerformed
+         ClientRun.socketHandler.getHistory(user);
+    }//GEN-LAST:event_btnGetHistoryActionPerformed
    
     /**
      * @param args the command line arguments
@@ -520,6 +548,7 @@ public void setUserScore(float score) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnGetHistory;
     private javax.swing.JButton btnGetInfo;
     private javax.swing.JButton btnGetRanking;
     private javax.swing.JButton btnLogout;

@@ -34,19 +34,19 @@ public class RankingView extends javax.swing.JFrame {
         rank1_name.setText( username);
     }
      public void setRank1_diem(float score) {
-    rank1_diem.setText(String.valueOf(score));
+        rank1_diem.setText(String.valueOf(score));
 }
       public void setRank2_name(String username) {
         rank2_name.setText( username);
     }
      public void setRank2_diem(float score) {
-    rank2_diem.setText(String.valueOf(score));
+        rank2_diem.setText(String.valueOf(score));
 }
     public void setRank3_name(String username) {
         rank3_name.setText( username);
     }
      public void setRank3_diem(float score) {
-    rank3_diem.setText(String.valueOf(score));
+        rank3_diem.setText(String.valueOf(score));
 }
 
  public void setRanking(String rankingData) {

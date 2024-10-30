@@ -11,6 +11,8 @@ import view.LoginView;
 import view.MessageView;
 import view.RegisterView;
 import view.RankingView;
+import view.HistoryView;
+        
 /**
  *
  * @author Ngọ Văn Trọng
@@ -23,8 +25,10 @@ public class ClientRun {
         HOMEVIEW,
         INFOPLAYER,
         RANKINGVIEW,
+        HISTORYVIEW,
         MESSAGEVIEW,
         GAMEVIEW
+        
     }
 
     // scenes
@@ -36,6 +40,7 @@ public class ClientRun {
     public static InfoPlayerView infoPlayerView;
     public static MessageView messageView;
     public static RankingView rankingView;
+    public static HistoryView historyView;
 
     // controller 
     public static SocketHandler socketHandler;
@@ -58,6 +63,7 @@ public class ClientRun {
         rankingView = new RankingView();
         messageView = new MessageView();
         gameView = new GameView();
+        historyView = new HistoryView();
     }
     
     
@@ -96,6 +102,10 @@ public class ClientRun {
                     gameView = new GameView();
                     gameView.setVisible(true);
                     break;
+                case HISTORYVIEW:
+                    historyView = new HistoryView();
+                    historyView.setVisible(true);
+                    break;
                 default:
                     break;
             }
@@ -123,12 +133,16 @@ public class ClientRun {
                 case RANKINGVIEW:
                     rankingView.dispose();
                     break;
+                case HISTORYVIEW:
+                    historyView.dispose();
+                    break;
                 case MESSAGEVIEW:
                     messageView.dispose();
                     break;
                 case GAMEVIEW:
                     gameView.dispose();
                     break;
+                
                 default:
                     break;
             }
@@ -143,7 +157,9 @@ public class ClientRun {
         infoPlayerView.dispose();
         messageView.dispose();
         rankingView.dispose();
+        historyView.dispose();
         gameView.dispose();
+       
     }
 
     public static void main(String[] args) {
