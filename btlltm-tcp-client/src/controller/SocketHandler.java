@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -219,8 +221,13 @@ public class SocketHandler {
     }
     
     public void sendMessage (String userInvited, String message) {
+        
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+        String formattedTime = currentTime.format(formatter);
+        
         String chat = "[" + loginUser + "] : " + message + "\n";
-        ClientRun.messageView.setContentChat(chat);
+        ClientRun.messageView.addSendMessage(chat, formattedTime);
             
         sendData("CHAT_MESSAGE;" + loginUser + ";" + userInvited  + ";" + message);
     }
@@ -498,8 +505,12 @@ public class SocketHandler {
             String userInvited = splitted[3];
             String message = splitted[4];
             
+            LocalDateTime currentTime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+            String formattedTime = currentTime.format(formatter);
+            
             String chat = "[" + userHost + "] : " + message + "\n";
-            ClientRun.messageView.setContentChat(chat);
+            ClientRun.messageView.addRecieveMessage(chat, formattedTime);
         }
     }
     

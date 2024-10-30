@@ -5,9 +5,12 @@
  */
 package view;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import java.awt.geom.Ellipse2D;
+import java.net.URL;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import run.ClientRun;
 
 /**
@@ -23,6 +26,9 @@ public class MessageView extends javax.swing.JFrame {
         initComponents();
         setIcon();
         
+        messageContainer.setOpaque(true);
+        messageContainer.setBackground(new Color(255, 241, 241));
+        messageContainer.setLayout(new BoxLayout(messageContainer, BoxLayout.Y_AXIS));
         // close window event
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -48,9 +54,100 @@ public class MessageView extends javax.swing.JFrame {
         userChat = username;
         infoUserChat.setText("Chat with: " + username);
     }
+
+    private JPanel createAvatarPanel(String initialName) {
+        JPanel avatarPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+                int diameter = Math.min(getWidth(), getHeight()) - 2;
+                int x = (getWidth() - diameter) / 2;
+                int y = (getHeight() - diameter) / 2;
+
+                g2d.setColor(Color.BLACK);
+                g2d.fillOval(x, y, diameter, diameter);
+
+                g2d.setColor(Color.WHITE);
+                g2d.setFont(new Font("Quicksand", Font.BOLD, 12));
+                FontMetrics fm = g2d.getFontMetrics();
+                int textX = x + (diameter - fm.stringWidth(initialName)) / 2;
+                int textY = y + (diameter + fm.getAscent()) / 2 - 3;
+                g2d.drawString(initialName, textX, textY);
+            }
+        };
+        avatarPanel.setPreferredSize(new Dimension(25, 25));
+        avatarPanel.setOpaque(false);
+        return avatarPanel;
+    }
     
-    public void setContentChat (String chat) {
-        contentChat.append(chat);
+    public JPanel recieveMessagePanel(String message, String time) {
+        JPanel recieveMessagePanel = new JPanel();
+        recieveMessagePanel.setLayout(new BoxLayout(recieveMessagePanel, BoxLayout.X_AXIS));
+        recieveMessagePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        
+        // Avatar panel (trái)
+        JPanel avatarPanel = createAvatarPanel("A");
+        
+        // Tin nhắn (giữa)
+        JLabel messageLabel = new JLabel("<html><div style='width: 250px;'>" + message + "</div></html>");
+        messageLabel.setBorder(null);
+        
+        // Thời gian (phải)
+        JLabel timeLabel = new JLabel(time);
+        timeLabel.setForeground(Color.GRAY);
+        
+        recieveMessagePanel.add(avatarPanel);
+        recieveMessagePanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        recieveMessagePanel.add(messageLabel);
+        recieveMessagePanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        recieveMessagePanel.add(timeLabel);
+        
+        recieveMessagePanel.setMaximumSize(new Dimension(480, recieveMessagePanel.getPreferredSize().height));
+        recieveMessagePanel.setBackground(new Color(255, 241, 241));
+        
+        return recieveMessagePanel;
+    }
+    
+    public JPanel sendMessagePanel(String message, String time) {
+        JPanel sendMessagePanel = new JPanel();
+        sendMessagePanel.setLayout(new BoxLayout(sendMessagePanel, BoxLayout.X_AXIS));
+        sendMessagePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        
+        // Avatar panel (phải)
+        JPanel avatarPanel = createAvatarPanel("S");
+        
+        // Tin nhắn (giữa)
+        JLabel messageLabel = new JLabel("<html><div style='width: 250px; text-align: right;'>" + message + "</div></html>");
+        messageLabel.setHorizontalAlignment(SwingConstants.RIGHT); 
+        
+        // Thời gian (trái)
+        JLabel timeLabel = new JLabel(time);
+        timeLabel.setForeground(Color.GRAY);
+        
+        sendMessagePanel.add(timeLabel);
+        sendMessagePanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        sendMessagePanel.add(messageLabel);
+        sendMessagePanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        sendMessagePanel.add(avatarPanel);
+        
+        sendMessagePanel.setMaximumSize(new Dimension(480, sendMessagePanel.getPreferredSize().height));
+        sendMessagePanel.setBackground(new Color(255, 241, 241));
+        return sendMessagePanel;
+    }
+    
+    public void addRecieveMessage(String message, String time) {
+        messageContainer.add(recieveMessagePanel(message, time));
+        messageContainer.revalidate(); // Cập nhật layout
+        messageContainer.repaint();
+    }
+
+    public void addSendMessage(String message, String time) {
+        messageContainer.add(sendMessagePanel(message, time));
+        messageContainer.revalidate(); // Cập nhật layout
+        messageContainer.repaint();
     }
     
     public void eventSendMessage () {
@@ -63,6 +160,38 @@ public class MessageView extends javax.swing.JFrame {
             tfMessage.grabFocus();
         }
     }
+    private static void customizeScrollBar(JScrollPane scrollPane){
+        JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+        verticalScrollBar.setBackground(Color.WHITE);
+        verticalScrollBar.setUI(new javax.swing.plaf.basic.BasicScrollBarUI(){
+            @Override
+            protected void configureScrollBarColors(){
+                this.thumbColor = new Color(236, 236, 236);
+                this.trackColor = Color.WHITE;
+            }
+            @Override
+            protected JButton createDecreaseButton(int orientation) {
+                return createZeroButton(); 
+            }
+
+            @Override
+            protected JButton createIncreaseButton(int orientation) {
+                return createZeroButton();
+            }
+
+            private JButton createZeroButton() {
+                JButton button = new JButton();
+                button.setPreferredSize(new Dimension(0, 0));
+                return button;
+            }
+        });
+    }
+    private void scrollToBottom() {
+        SwingUtilities.invokeLater(() -> {
+            JScrollBar verticalScrollBar = ((JScrollPane) SwingUtilities.getAncestorOfClass(JScrollPane.class, messageContainer)).getVerticalScrollBar();
+            verticalScrollBar.setValue(verticalScrollBar.getMaximum());
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,10 +203,9 @@ public class MessageView extends javax.swing.JFrame {
 
         tfMessage = new javax.swing.JTextField();
         btnSend = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        contentChat = new javax.swing.JTextArea();
         infoUserChat = new javax.swing.JLabel();
         btnLeaveChat = new javax.swing.JButton();
+        messageContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -98,13 +226,6 @@ public class MessageView extends javax.swing.JFrame {
             }
         });
 
-        contentChat.setEditable(false);
-        contentChat.setBackground(new java.awt.Color(204, 255, 255));
-        contentChat.setColumns(20);
-        contentChat.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        contentChat.setRows(5);
-        jScrollPane1.setViewportView(contentChat);
-
         infoUserChat.setBackground(new java.awt.Color(204, 0, 0));
         infoUserChat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         infoUserChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/message1.gif"))); // NOI18N
@@ -120,6 +241,17 @@ public class MessageView extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout messageContainerLayout = new javax.swing.GroupLayout(messageContainer);
+        messageContainer.setLayout(messageContainerLayout);
+        messageContainerLayout.setHorizontalGroup(
+            messageContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        messageContainerLayout.setVerticalGroup(
+            messageContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 284, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,13 +259,13 @@ public class MessageView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(messageContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tfMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addComponent(tfMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(infoUserChat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(infoUserChat, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLeaveChat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -141,17 +273,17 @@ public class MessageView extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(infoUserChat, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLeaveChat, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(messageContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -211,9 +343,8 @@ public class MessageView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLeaveChat;
     private javax.swing.JButton btnSend;
-    private javax.swing.JTextArea contentChat;
     private javax.swing.JLabel infoUserChat;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel messageContainer;
     private javax.swing.JTextField tfMessage;
     // End of variables declaration//GEN-END:variables
 }
