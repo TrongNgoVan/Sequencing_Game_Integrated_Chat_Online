@@ -19,7 +19,7 @@ import run.ClientRun;
  */
 public class HomeView extends javax.swing.JFrame {
     String statusCompetitor = "";
-
+    String user;
     /**
      * Creates new form HomeView
      */
@@ -51,6 +51,7 @@ public class HomeView extends javax.swing.JFrame {
     }
     
     public void setUsername(String username) {
+        user = username;
         infoUsername.setText( username);
     }
    public void setUserWin(int win) {
@@ -537,7 +538,7 @@ public void setUserScore(float score) {
     }//GEN-LAST:event_btnGetRankingActionPerformed
 
     private void btnGetHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetHistoryActionPerformed
-         ClientRun.socketHandler.getHistory(new SocketHandler().getLoginUser());
+         ClientRun.socketHandler.getHistory(user);
     }//GEN-LAST:event_btnGetHistoryActionPerformed
    
     /**

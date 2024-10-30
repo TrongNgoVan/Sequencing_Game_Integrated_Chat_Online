@@ -141,6 +141,9 @@ public class SocketHandler {
                     case "ASK_PLAY_AGAIN":
                         onReceiveAskPlayAgain(received);
                         break;
+                    case "GET_HISTORY":
+                        onReceivedHistory(received);
+                        break;
                         
                     case "EXIT":
                         running = false;
@@ -308,7 +311,14 @@ public class SocketHandler {
         ClientRun.rankingView.setRanking(rankingData.toString()); // Gọi phương thức hiển thị thông tin xếp hạng
     }
 }
-
+    private void onReceivedHistory(String received) {
+            String[] splited = received.split(";");
+            String result = splited[1]; 
+            
+            ClientRun.openScene(ClientRun.SceneName.HISTORYVIEW); 
+            ClientRun.historyView.setHistory(result,loginUser); 
+    }
+           
     /***
      * Handle receive data from server
      */
