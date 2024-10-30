@@ -130,7 +130,7 @@
                 <Column editable="false" title="TH&#x1edc;I GIAN TRUNG B&#xcc;NH" type="java.lang.Object"/>
               </Table>
             </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="Ranking.getTableHeader().setFont(new java.awt.Font(&quot;Tahoma&quot;, java.awt.Font.BOLD, 18));&#xa; DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();&#xa;    centerRenderer.setHorizontalAlignment(JLabel.CENTER);&#xa;&#xa;    // &#xc1;p d&#x1ee5;ng renderer cho t&#x1eeb;ng c&#x1ed9;t&#xa;    for (int i = 0; i &lt; Ranking.getColumnCount(); i++) {&#xa;        Ranking.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);&#xa;    }&#xa;&#xa;    // T&#x103;ng chi&#x1ec1;u cao c&#x1ee7;a header&#xa;    Ranking.getTableHeader().setPreferredSize(new java.awt.Dimension(Ranking.getTableHeader().getPreferredSize().width, 40));">
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="Ranking.getTableHeader().setFont(new java.awt.Font(&quot;Tahoma&quot;, java.awt.Font.BOLD, 18));&#xa;Ranking.getTableHeader().setForeground(Color.WHITE);&#xa;Ranking.getTableHeader().setBackground(Color.RED);&#xa; DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();&#xa;    centerRenderer.setHorizontalAlignment(JLabel.CENTER);&#xa; &#xa;&#xa;&#xa;    // &#xc1;p d&#x1ee5;ng renderer cho t&#x1eeb;ng c&#x1ed9;t&#xa;    for (int i = 0; i &lt; Ranking.getColumnCount(); i++) {&#xa;        Ranking.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);&#xa;    }&#xa;&#xa;    // T&#x103;ng chi&#x1ec1;u cao c&#x1ee7;a header&#xa;    Ranking.getTableHeader().setPreferredSize(new java.awt.Dimension(Ranking.getTableHeader().getPreferredSize().width, 40));">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title value="RANK"/>
@@ -160,7 +160,7 @@
               </TableColumnModel>
             </Property>
             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="99" green="99" red="99" type="rgb"/>
+              <Color blue="0" green="0" red="cc" type="rgb"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[2147483647, 800]"/>

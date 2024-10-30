@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -193,7 +194,7 @@ public class RankingView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        Ranking.setGridColor(new java.awt.Color(153, 153, 153));
+        Ranking.setGridColor(new java.awt.Color(204, 0, 0));
         Ranking.setMaximumSize(new java.awt.Dimension(2147483647, 800));
         Ranking.setMinimumSize(new java.awt.Dimension(200, 800));
         Ranking.setRowHeight(30);
@@ -206,6 +207,8 @@ public class RankingView extends javax.swing.JFrame {
             Ranking.getColumnModel().getColumn(4).setHeaderValue("THỜI GIAN TRUNG BÌNH");
         }
         Ranking.getTableHeader().setFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, 18));
+        Ranking.getTableHeader().setForeground(Color.WHITE);
+        Ranking.getTableHeader().setBackground(Color.RED);
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
