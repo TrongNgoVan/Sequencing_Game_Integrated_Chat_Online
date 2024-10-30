@@ -12,7 +12,10 @@ import java.net.URL;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import run.ClientRun;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 /**
  *
  * @author Ngọ Văn Trọng
@@ -55,40 +58,51 @@ public class MessageView extends javax.swing.JFrame {
         infoUserChat.setText( username);
     }
 
-    private JPanel createAvatarPanel(String initialName) {
-        JPanel avatarPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
+
+private JPanel createAvatarPanel(String imagePath) {
+    JPanel avatarPanel = new JPanel() {
+        private BufferedImage avatarImage;
+
+        {
+            // Load hình ảnh từ đường dẫn
+            try {
+                avatarImage = ImageIO.read(new File(imagePath));
+            } catch (IOException e) {
+                e.printStackTrace();
+                avatarImage = null; // Nếu không tải được, để trống
+            }
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (avatarImage != null) {
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+                // Vẽ ảnh avatar trong hình tròn
                 int diameter = Math.min(getWidth(), getHeight()) - 2;
                 int x = (getWidth() - diameter) / 2;
                 int y = (getHeight() - diameter) / 2;
 
-                g2d.setColor(Color.BLACK);
-                g2d.fillOval(x, y, diameter, diameter);
-
-                g2d.setColor(Color.WHITE);
-                g2d.setFont(new Font("Quicksand", Font.BOLD, 12));
-                FontMetrics fm = g2d.getFontMetrics();
-                int textX = x + (diameter - fm.stringWidth(initialName)) / 2;
-                int textY = y + (diameter + fm.getAscent()) / 2 - 3;
-                g2d.drawString(initialName, textX, textY);
+                // Tạo ảnh bo tròn
+                Shape circle = new java.awt.geom.Ellipse2D.Double(x, y, diameter, diameter);
+                g2d.setClip(circle);
+                g2d.drawImage(avatarImage, x, y, diameter, diameter, null);
             }
-        };
-        avatarPanel.setPreferredSize(new Dimension(25, 25));
-        avatarPanel.setOpaque(false);
-        return avatarPanel;
-    }
-    
+        }
+    };
+
+    avatarPanel.setPreferredSize(new Dimension(45, 45)); // Đặt kích thước avatar
+    avatarPanel.setOpaque(false);
+    return avatarPanel;
+}
  public JPanel recieveMessagePanel(String message, String time) {
     JPanel recieveMessagePanel = new JPanel();
     recieveMessagePanel.setLayout(new BoxLayout(recieveMessagePanel, BoxLayout.X_AXIS));
 
     // Avatar panel (trái)
-    JPanel avatarPanel = createAvatarPanel("A");
+     JPanel avatarPanel = createAvatarPanel("C:/Users/MEDIAMART PHU SON/Documents/NetBeansProjects/btlltm-ptit/btlltm-tcp-client/src/Static/avatar.jpg");
 
     // Tin nhắn (giữa) với bo góc
     RoundedPanel messagePanel = new RoundedPanel(15, new Color(255, 241, 241)); // Màu nền nhẹ, góc bo 15px
@@ -144,7 +158,8 @@ public JPanel sendMessagePanel(String message, String time) {
     sendMessagePanel.add(Box.createRigidArea(new Dimension(10, 0)));
 
     // Avatar panel (phải)
-    JPanel avatarPanel = createAvatarPanel("S");
+    JPanel avatarPanel = createAvatarPanel("C:/Users/MEDIAMART PHU SON/Documents/NetBeansProjects/btlltm-ptit/btlltm-tcp-client/src/Static/avatar.jpg");
+
     sendMessagePanel.add(avatarPanel);
 
     sendMessagePanel.setMaximumSize(new Dimension(480, sendMessagePanel.getPreferredSize().height));
