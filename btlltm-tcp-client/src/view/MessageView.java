@@ -83,63 +83,68 @@ public class MessageView extends javax.swing.JFrame {
         avatarPanel.setOpaque(false);
         return avatarPanel;
     }
-    
-        public JPanel recieveMessagePanel(String message, String time) {
-         JPanel recieveMessagePanel = new JPanel();
-         recieveMessagePanel.setLayout(new BoxLayout(recieveMessagePanel, BoxLayout.X_AXIS));
-         recieveMessagePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-         // Avatar panel (trái)
-         JPanel avatarPanel = createAvatarPanel("A");
+    public JPanel recieveMessagePanel(String message, String time) {
+            JPanel recieveMessagePanel = new JPanel();
+            recieveMessagePanel.setLayout(new BoxLayout(recieveMessagePanel, BoxLayout.X_AXIS));
+            recieveMessagePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-         // Tin nhắn (giữa)
-         JLabel messageLabel = new JLabel("<html><div style='width: 250px;'>" + message + "</div></html>");
-         messageLabel.setFont(new Font("Tahoma", Font.BOLD, 18)); // Đặt cỡ chữ to hơn
-         messageLabel.setBorder(null);
-
-         // Thời gian (phải)
-         JLabel timeLabel = new JLabel(time);
-         timeLabel.setForeground(Color.GRAY);
-
-         recieveMessagePanel.add(avatarPanel);
-         recieveMessagePanel.add(Box.createRigidArea(new Dimension(10, 0)));
-         recieveMessagePanel.add(messageLabel);
-         recieveMessagePanel.add(Box.createRigidArea(new Dimension(10, 0)));
-         recieveMessagePanel.add(timeLabel);
-
-         recieveMessagePanel.setMaximumSize(new Dimension(480, recieveMessagePanel.getPreferredSize().height));
-         recieveMessagePanel.setBackground(new Color(255, 241, 241));
-
-         return recieveMessagePanel;
-     }
-
-        public JPanel sendMessagePanel(String message, String time) {
-            JPanel sendMessagePanel = new JPanel();
-            sendMessagePanel.setLayout(new BoxLayout(sendMessagePanel, BoxLayout.X_AXIS));
-            sendMessagePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-            // Avatar panel (phải)
-            JPanel avatarPanel = createAvatarPanel(sockethanlder.loginUser());
+            // Avatar panel (trái)
+            JPanel avatarPanel = createAvatarPanel("A");
 
             // Tin nhắn (giữa)
-            JLabel messageLabel = new JLabel("<html><div style='width: 250px; text-align: right;'>" + message + "</div></html>");
-            messageLabel.setFont(new Font("Tahoma", Font.BOLD, 18)); // Đặt cỡ chữ to hơn
-            messageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+            JLabel messageLabel = new JLabel("<html><div style='width: 250px;'>" + message + "</div></html>");
+            messageLabel.setFont(new Font("Tahoma", Font.BOLD, 20)); // Đặt cỡ chữ to và đậm hơn
+            messageLabel.setBorder(null);
 
-            // Thời gian (trái)
+            // Thời gian (phải)
             JLabel timeLabel = new JLabel(time);
             timeLabel.setForeground(Color.GRAY);
+            timeLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+            timeLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-            sendMessagePanel.add(timeLabel);
-            sendMessagePanel.add(Box.createRigidArea(new Dimension(10, 0)));
-            sendMessagePanel.add(messageLabel);
-            sendMessagePanel.add(Box.createRigidArea(new Dimension(10, 0)));
-            sendMessagePanel.add(avatarPanel);
+            recieveMessagePanel.add(avatarPanel);
+            recieveMessagePanel.add(Box.createRigidArea(new Dimension(10,0)));
+            recieveMessagePanel.add(messageLabel);
+            recieveMessagePanel.add(Box.createRigidArea(new Dimension(10,0)));
+            recieveMessagePanel.add(timeLabel);
 
-            sendMessagePanel.setMaximumSize(new Dimension(480, sendMessagePanel.getPreferredSize().height));
-            sendMessagePanel.setBackground(new Color(255, 241, 241));
-            return sendMessagePanel;
-        }
+            recieveMessagePanel.setMaximumSize(new Dimension(480, recieveMessagePanel.getPreferredSize().height));
+            recieveMessagePanel.setBackground(new Color(255, 241, 241));
+
+            return recieveMessagePanel;
+    }
+
+    public JPanel sendMessagePanel(String message, String time) {
+        JPanel sendMessagePanel = new JPanel();
+        sendMessagePanel.setLayout(new BoxLayout(sendMessagePanel, BoxLayout.X_AXIS));
+        sendMessagePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+        // Avatar panel (phải)
+        JPanel avatarPanel = createAvatarPanel("S");
+
+        // Tin nhắn (giữa)
+        JLabel messageLabel = new JLabel("<html><div style='width: 250px; text-align: right;'>" + message + "</div></html>");
+        messageLabel.setFont(new Font("Tahoma", Font.BOLD, 20)); // Đặt cỡ chữ to và đậm hơn
+        messageLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        // Thời gian (trái)
+        JLabel timeLabel = new JLabel(time);
+        timeLabel.setForeground(Color.GRAY);
+        timeLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        timeLabel.setAlignmentX(Component.RIGHT_ALIGNMENT); // Canh thời gian về bên phải
+        
+        sendMessagePanel.add(timeLabel);
+        sendMessagePanel.add(Box.createRigidArea(new Dimension(10,0)));
+        sendMessagePanel.add(messageLabel);
+        sendMessagePanel.add(Box.createRigidArea(new Dimension(10,0)));
+        sendMessagePanel.add(avatarPanel);
+
+        sendMessagePanel.setMaximumSize(new Dimension(480, sendMessagePanel.getPreferredSize().height));
+        sendMessagePanel.setBackground(new Color(255, 241, 241));
+        return sendMessagePanel;
+    }
+
 
     
     public void addRecieveMessage(String message, String time) {
