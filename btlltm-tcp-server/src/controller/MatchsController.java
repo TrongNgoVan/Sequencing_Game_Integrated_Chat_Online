@@ -14,6 +14,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import connection.DatabaseConnection;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.Comparator;
 public class MatchsController {
     private final Connection con;
 
@@ -65,29 +69,52 @@ public class MatchsController {
     }
 
     // Lấy lịch sử trận đấu theo tên người dùng
-    public List<Matchs> getHistory(String username) throws SQLException {
-        List<Matchs> matches = new ArrayList<>();
-        String sql = "SELECT * FROM matchs WHERE user1 = ? OR user2 = ? ORDER BY time_begin DESC";
-        try (PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setString(1, username);
-            stmt.setString(2, username);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Matchs match = new Matchs(
-                        rs.getString("id_match"),
-                        rs.getString("user1"),
-                        rs.getString("user2"),
-                        rs.getString("user_win"),
-                        rs.getFloat("score_win"),
-                        rs.getTimestamp("time_begin").toLocalDateTime(),
-                        rs.getFloat("score_lose")
-                    );
-                    matches.add(match);
-                }
+public List<String> getHistory(String username) throws SQLException {
+    List<String> matches = new ArrayList<>();
+    String sql = "SELECT * FROM matchs WHERE user1 = ? OR user2 = ? ORDER BY time_begin DESC";
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // Định dạng thời gian
+
+    try (PreparedStatement stmt = con.prepareStatement(sql)) {
+        stmt.setString(1, username);
+        stmt.setString(2, username);
+        try (ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                // Chuyển đổi dữ liệu của mỗi trận đấu thành một chuỗi
+                String match = String.format(
+                    "%s/ %s/ %s/ %s/ %.1f/ %s/ %.1f",
+                    rs.getString("id_match"),
+                    rs.getString("user1"),
+                    rs.getString("user2"),
+                    rs.getString("user_win"),
+                    rs.getFloat("score_win"),
+                    rs.getTimestamp("time_begin").toLocalDateTime().format(formatter), // Định dạng thời gian
+                    rs.getFloat("score_lose")
+                );
+                matches.add(match);
             }
         }
-        return matches;
     }
+
+    // Sắp xếp danh sách theo thứ tự ngày tháng
+    Collections.sort(matches, new Comparator<String>() {
+        @Override
+        public int compare(String match1, String match2) {
+            // Tách chuỗi để lấy phần thời gian (phần thứ 6 trong chuỗi)
+            String time1 = match1.split("/ ")[5]; // Phần thời gian của match1
+            String time2 = match2.split("/ ")[5]; // Phần thời gian của match2
+
+            // Chuyển đổi chuỗi thành LocalDateTime
+            LocalDateTime dateTime1 = LocalDateTime.parse(time1, formatter);
+            LocalDateTime dateTime2 = LocalDateTime.parse(time2, formatter);
+
+            // So sánh ngày tháng
+            return dateTime1.compareTo(dateTime2);
+        }
+    });
+
+    return matches;
+}
+
 
    
 

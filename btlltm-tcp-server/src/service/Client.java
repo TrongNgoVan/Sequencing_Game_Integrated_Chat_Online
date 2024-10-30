@@ -191,12 +191,20 @@ public class Client implements Runnable {
         // send result
         sendData("REGISTER" + ";" + result);
     }
-    private void onReceiveGetHistory(String received) throws SQLException{
-      String[] splited = received.split(";");
-      String user = splited[1];
-      List<Matchs> result = new MatchsController().getHistory(user);
-      sendData("GET_HISTORY" + ";" + result) ;
-    }
+    private void onReceiveGetHistory(String received) throws SQLException {
+        String[] splited = received.split(";");
+        String user = splited[1];
+
+        // Lấy danh sách kết quả từ getHistory
+        List<String> result = new MatchsController().getHistory(user);
+
+        // Nối các chuỗi trong danh sách với dấu phân cách "|"
+        String resultString = String.join("|", result);
+
+        // Gửi chuỗi kết quả qua TCP
+        sendData("GET_HISTORY" + ";" + resultString);
+}
+
     
     private void onReceiveGetListOnline() {
         String result = ServerRun.clientManager.getListUseOnline();
