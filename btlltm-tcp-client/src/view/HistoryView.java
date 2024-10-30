@@ -210,7 +210,7 @@ public class HistoryView extends javax.swing.JFrame {
         exit.setBackground(new java.awt.Color(204, 0, 0));
         exit.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         exit.setForeground(new java.awt.Color(255, 255, 255));
-        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/exit.png"))); // NOI18N
+        exit.setText("Exit");
         exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitActionPerformed(evt);
