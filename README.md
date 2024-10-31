@@ -66,7 +66,8 @@
 
 # Demo App.
 ## 1. Server Run.
-![image](https://github.com/user-attachments/assets/9055f8fb-effd-450b-a16c-c7fb475ff317)
+![image](https://github.com/user-attachments/assets/0d61ae68-16b7-413a-adc1-ac5e6e857fcc)
+
 
 ## 2. Client Run.
 
@@ -77,28 +78,33 @@
 ![image](https://github.com/user-attachments/assets/0f97d2e5-3e0b-4935-a17b-d3afecdd20d5)
 
 ### 2.2 Client Login -> Home.
-![image](https://github.com/user-attachments/assets/abd2b4e9-1f52-4899-8fe2-80d6e7eb19c7)
+![image](https://github.com/user-attachments/assets/35337796-da75-4f9c-b277-6a23e4b0c271)
+
+
 
 ### 2.3 Client Chat với nhau.
 
-![image](https://github.com/user-attachments/assets/04c467b6-8c22-467e-9290-01bfd45a26da)
-
-![image](https://github.com/user-attachments/assets/12e63886-b677-4714-b748-49e063f3debe)
+![image](https://github.com/user-attachments/assets/fdd5e188-9400-45f1-8f8a-45fe0d31eef9)
 
 
-### 2.4 Client xem Rank, xem Infor của nhau.
-![image](https://github.com/user-attachments/assets/423061af-2a17-44b0-a8ae-57164e401886)
+### 2.4 Xem Profile của nhau.
+![image](https://github.com/user-attachments/assets/8d5c5a0d-64f5-473c-af4c-011f0b94248c)
+
+
+### 2.5 Client xem Rank
+![image](https://github.com/user-attachments/assets/e72cc995-a889-45a3-a5b6-5c6bc77eef89)
+
+### 2.6 Xem lịch xử đấu.
+![image](https://github.com/user-attachments/assets/39ae9317-38cc-4ecc-bd7a-650ff07b8c02)
+
 
 
 ### 2.5 Client chơi Game với nhau.
 
-![image](https://github.com/user-attachments/assets/10fc866c-b621-4bd2-b404-f4412c3755b0)
 
-![image](https://github.com/user-attachments/assets/5540bc27-9fc3-4f74-9512-e343a04793e9)
+![image](https://github.com/user-attachments/assets/19a7c680-ebb0-448b-b4b2-c6b623d82277)
 
-
-
-
+![image](https://github.com/user-attachments/assets/497305ef-57fc-4660-ba14-ae26ab45e5e8)
 
 
 
