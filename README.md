@@ -75,16 +75,19 @@
 
 ### 2.1 Client Connect, Server ghi Log.
 
-![image](https://github.com/user-attachments/assets/0f97d2e5-3e0b-4935-a17b-d3afecdd20d5)
+![image](https://github.com/user-attachments/assets/673c8d01-d232-4227-8697-3db75cc1b1f1)
+
 
 ### 2.2 Client Login -> Home.
-![image](https://github.com/user-attachments/assets/35337796-da75-4f9c-b277-6a23e4b0c271)
+![image](https://github.com/user-attachments/assets/c7d9d825-17fc-4c6b-9f28-bef44c93733a)
+
 
 
 
 ### 2.3 Client Chat với nhau.
 
-![image](https://github.com/user-attachments/assets/fdd5e188-9400-45f1-8f8a-45fe0d31eef9)
+![image](https://github.com/user-attachments/assets/24dd1fc2-e4a1-4c6e-9829-7e57e81d6eb9)
+
 
 
 ### 2.4 Xem Profile của nhau.
@@ -92,19 +95,25 @@
 
 
 ### 2.5 Client xem Rank
-![image](https://github.com/user-attachments/assets/e72cc995-a889-45a3-a5b6-5c6bc77eef89)
+![image](https://github.com/user-attachments/assets/406d9cd6-161f-42df-b8d6-0b96e3662961)
+
 
 ### 2.6 Xem lịch xử đấu.
-![image](https://github.com/user-attachments/assets/39ae9317-38cc-4ecc-bd7a-650ff07b8c02)
+![image](https://github.com/user-attachments/assets/256a0cad-6ede-4795-ada6-9aea91d386de)
+
 
 
 
 ### 2.5 Client chơi Game với nhau.
 
 
-![image](https://github.com/user-attachments/assets/19a7c680-ebb0-448b-b4b2-c6b623d82277)
+![image](https://github.com/user-attachments/assets/fa5b5e81-7092-4d0d-a67f-9018d5c7e8ad)
 
-![image](https://github.com/user-attachments/assets/497305ef-57fc-4660-ba14-ae26ab45e5e8)
+![image](https://github.com/user-attachments/assets/3276cc69-ccf3-41c3-945d-267b63f79021)
+
+![image](https://github.com/user-attachments/assets/07461b81-5f4c-4bcb-b1fe-a64b4d497e42)
+
+
 
 
 
