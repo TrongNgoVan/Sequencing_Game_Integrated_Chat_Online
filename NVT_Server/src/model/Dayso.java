@@ -12,49 +12,28 @@ import java.util.Random;
  */
 public class Dayso{
 
-    public static String renQuestion() {
-        // Tạo một dãy số hoặc chữ cái ngẫu nhiên
-        List<String> list = randomList(); // List ngẫu nhiên
-        List<String> correctAnswer = new ArrayList<>(list); // Đáp án đúng
+  public static String renQuestion() {
+    // Tạo một dãy số hoặc chữ cái ngẫu nhiên
+    List<String> list = randomList(); // List ngẫu nhiên
 
-        // Sắp xếp danh sách theo thứ tự tăng dần
-        Collections.sort(correctAnswer);
+    // Chuyển List<String> thành chuỗi, mỗi phần tử cách nhau bằng dấu phẩy
+    String msg = String.join(",", list);
 
-        // Tạo danh sách chứa các đáp án sai
-        List<List<String>> wrongAnswers = generateWrongAnswers(list);
+    return msg;
+}
 
-        // Gộp đáp án đúng và đáp án sai
-        wrongAnswers.add(correctAnswer);
-
-        // Trộn thứ tự các đáp án (để đảm bảo đáp án đúng không luôn ở vị trí cố định)
-        Collections.shuffle(wrongAnswers);
-
-        // Xây dựng chuỗi thông báo câu hỏi và các đáp án
-        String msg = String.join(",", list) + ";" ;
-        int i = 1;
-        for (List<String> answer : wrongAnswers) {
-            msg +=  String.join(",", answer)+ ";" ;
-            i++;
-        }
-
-        return msg;
-    }
 
     // Hàm tạo danh sách ngẫu nhiên (chứa chữ cái hoặc số)
     static List<String> randomList() {
         Random random = new Random();
         List<String> list = new ArrayList<>();
         // Tạo dãy số ngẫu nhiên
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             int number = random.nextInt(100); // Tạo số từ 0 đến 99
             list.add(String.valueOf(number));
         }
 
-        // Hoặc nếu muốn tạo dãy chữ cái thay vì số, có thể thay thế bằng:
-        // for (int i = 0; i < 5; i++) {
-        //     char letter = (char) ('A' + random.nextInt(26)); // Tạo chữ cái ngẫu nhiên từ A-Z
-        //     list.add(String.valueOf(letter));
-        // }
+      
 
         return list;
     }

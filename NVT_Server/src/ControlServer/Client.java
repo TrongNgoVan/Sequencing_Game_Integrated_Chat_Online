@@ -401,23 +401,22 @@ public class Client implements Runnable {
         sendData("CHECK_STATUS_USER" + ";" + username + ";" + status);
     }
             
-    private void onReceiveStartGame(String received) {
-        String[] splitted = received.split(";");
-        String user1 = splitted[1];
-        String user2 = splitted[2];
-        String roomId = splitted[3];
-        
-        String question1 = Dayso.renQuestion();
-        String question2 = Dayso.renQuestion();
-        String question3 = Dayso.renQuestion();
-        String question4 = Dayso.renQuestion();
-        
-        String data = "START_GAME;success;" + roomId + ";" + question1 + question2 + question3 + question4;
-        // Send question here
-        joinedRoom.resetRoom();
-        joinedRoom.broadcast(data);
-        joinedRoom.startGame();
-    } 
+private void onReceiveStartGame(String received) {
+    String[] splitted = received.split(";");
+    String user1 = splitted[1];
+    String user2 = splitted[2];
+    String roomId = splitted[3];
+    String question1 = Dayso.renQuestion();
+    String data = "START_GAME;success;" + roomId + ";" + question1;
+    
+    // In ra thông tin server gửi
+    System.out.println("Server gửi: " + data);
+
+    // Send question here
+    joinedRoom.resetRoom();
+    joinedRoom.broadcast(data);
+    joinedRoom.startGame();
+} 
     
   private void onReceiveSubmitResult(String received) throws SQLException {
         // Kiểm tra và phân tích chuỗi nhận được
@@ -425,7 +424,7 @@ public class Client implements Runnable {
         String user1 = splitted[1];
         String user2 = splitted[2];
         String roomId = splitted[3];
-
+         
         if (joinedRoom == null || joinedRoom.getClient1() == null || joinedRoom.getClient2() == null) {
             throw new IllegalStateException("Joined room or clients are not properly initialized.");
         }

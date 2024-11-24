@@ -250,27 +250,20 @@ public class ClientController {
         sendData("START_GAME;" + loginUser + ";" + userInvited + ";" + roomIdPresent);
     }
     
-    public void submitResult (String competitor) { 
-        String result1 = ClientRun.gameView.getSelectedButton1();
-        String result2 = ClientRun.gameView.getSelectedButton2();
-        String result3 = ClientRun.gameView.getSelectedButton3();
-        String result4 = ClientRun.gameView.getSelectedButton4();
-        if (result1 == null || result2 == null || result3 == null || result4 == null) {
-            ClientRun.gameView.showMessage("Don't leave blank!");
+    public void submitResult (String competitor,String result, String tong) { 
+      
+        if (result == "") {
+            ClientRun.gameView.showMessage("Hãy điền đầy đủ!");
         } else {
-            ClientRun.gameView.pauseTime();
-            // Handle calculate time
+//            ClientRun.gameView.pauseTime();
+//            // Handle calculate time
             String[] splitted = ClientRun.gameView.pbgTimer.getString().split(":");
             String countDownTime = splitted[1];
             int time = 30 - Integer.parseInt(countDownTime);
-            
-            String data = ClientRun.gameView.getA1() + ";"  + result1 + ";"
-                        + ClientRun.gameView.getA2() + ";"  + result2 + ";"
-                        + ClientRun.gameView.getA3() + ";"  + result3 + ";"
-                        + ClientRun.gameView.getA4() + ";"  + result4 + ";"
-                        + time;
-            
-            sendData("SUBMIT_RESULT;" + loginUser + ";" + competitor + ";" + roomIdPresent + ";" + data);
+          
+            String data = "SUBMIT_RESULT;" + loginUser + ";" + competitor + ";" + roomIdPresent + ";" + result + ";" + time + ";"+ tong;
+            System.out.println(data);
+            sendData(data);
             ClientRun.gameView.afterSubmit();
         }
     }
@@ -602,40 +595,12 @@ public class ClientController {
         // get status from data
         String[] splitted = received.split(";");
         String status = splitted[1];
+        String dayso = splitted[3];
 
-        if (status.equals("success")) {
-            String a1 = splitted[3];
-            String answer1a = splitted[4];
-            String answer1b = splitted[5];
-            String answer1c = splitted[6];
-            String answer1d = splitted[7];
-            ClientRun.gameView.setQuestion1(a1, answer1a, answer1b, answer1c, answer1d);
-            
-            String a2 = splitted[8];
-           
-            String answer2a = splitted[9];
-            String answer2b = splitted[10];
-            String answer2c = splitted[11];
-            String answer2d = splitted[12];
-            ClientRun.gameView.setQuestion2(a2,  answer2a, answer2b, answer2c, answer2d);
-            
-            String a3 = splitted[13];
-           
-            String answer3a = splitted[14];
-            String answer3b = splitted[15];
-            String answer3c = splitted[16];
-            String answer3d = splitted[17];
-            ClientRun.gameView.setQuestion3(a3, answer3a, answer3b, answer3c, answer3d);
-            
-            String a4 = splitted[18];
-            
-            String answer4a = splitted[19];
-            String answer4b = splitted[20];
-            String answer4c = splitted[21];
-            String answer4d = splitted[22];
-            ClientRun.gameView.setQuestion4(a4, answer4a, answer4b, answer4c, answer4d);
-            
-            ClientRun.gameView.setStartGame(20);
+        if (status.equals("success")) {      
+          
+            ClientRun.gameView.setStartGame(20, dayso);
+          
         }
     }
     

@@ -1,30 +1,46 @@
 
 package view;
 
-import java.util.concurrent.Callable;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import controller.ClientController;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import run.ClientRun;
 import model.*;
-import java.util.Enumeration;
-import javax.swing.AbstractButton;
-import javax.swing.ImageIcon;
+import java.util.*;
+import java.util.concurrent.Callable;
+import javax.swing.*;
 
 /**
  *
  * @author Ngọ Văn Trọng
  */
 public class GameView extends javax.swing.JFrame {
+    
+    private static final int WIDTH = 80;
+    private static final int HEIGHT = 80;
+    private static final int X_SPACING = 50;
+    private static final int Y_SPACING = 4;
+    private static final int X_OFFSET = 8;
+    private static final int Y_OFFSET = 5;
+    
+    private JLabel[] labels = new JLabel[10]; 
+    private JPanel[] answerJPanels = new JPanel[10];
+    private JPanel[] containerJPanels = new JPanel[10];
+    private Map<JLabel, Integer> originalPositions = new HashMap<>();
+    private Map<JLabel, Integer> answerPositions = new HashMap<>();
+    private PriorityQueue<Integer> emptyPanels = new PriorityQueue<>();
+    private List<Integer> availableNumbers = new ArrayList<>();
 
     String competitor = "";
     DemTG matchTimer;
     DemTG waitingClientTimer;
     
-    String a1 = "";
-    String a2 = "";
-    String a3 = "";
-    String a4 = "";
-   
+
     
     boolean answer = false;
    
@@ -37,8 +53,12 @@ public class GameView extends javax.swing.JFrame {
     }
     public GameView() {
         initComponents();
-        setIcon(); 
+       
+       
+        answerPanel.setLayout(null);
+        addPanelsToAnswerPanel();
         
+        setIcon(); 
         setPanel(0);
         panelPlayAgain.setVisible(false);
         win.setVisible(false);
@@ -59,21 +79,188 @@ public class GameView extends javax.swing.JFrame {
         });
     }
     
-    public void setPanel(int a){
-        if(a == 1){
-       jPanel2.setVisible(true);
-        jPanel3.setVisible(true);
-         jPanel4.setVisible(true);
-          jPanel5.setVisible(true);
+
+    
+    private void addPanelsToAnswerPanel() {
+        int x = 8;
+        int y = 0;
+        for (int i = 0; i < answerJPanels.length; i++) {
+            answerJPanels[i] = new JPanel();
+            answerJPanels[i].setPreferredSize(new Dimension(WIDTH, HEIGHT));
+            answerJPanels[i].setBackground(new java.awt.Color(0, 204, 255));
+            answerJPanels[i].setBounds(x, y, WIDTH, HEIGHT);
+
+            answerPanel.add(answerJPanels[i]);
+            emptyPanels.add(i);
+
+            x += WIDTH + X_OFFSET;
         }
-        if(a==0){
-           jPanel2.setVisible(false);
-           jPanel3.setVisible(false);
-           jPanel4.setVisible(false);
-           jPanel5.setVisible(false);
-        }
-        
+        answerPanel.revalidate();
+        answerPanel.repaint();
     }
+    
+    private void addPanelsToContainerPanel() {
+        // Create and add labels to containerPanel
+        for (int i = 0; i < containerJPanels.length; i++) {
+            labels[i] = createLabel(i);
+            containerJPanels[i] = new JPanel();
+            containerJPanels[i].setPreferredSize(new Dimension(WIDTH, HEIGHT));
+            containerJPanels[i].setBackground(new java.awt.Color(204, 0, 0));
+            containerJPanels[i].setBounds(
+                55 + (i % 5) * (WIDTH + X_SPACING),
+                4 + (i / 5) * (HEIGHT + Y_SPACING),
+                WIDTH, HEIGHT
+            );
+            containerJPanels[i].add(labels[i]);
+            answerPositions.put(labels[i], null);
+            containerPanel.add(containerJPanels[i]);
+        }
+        containerPanel.revalidate();
+        containerPanel.repaint();
+    }
+    
+  private JLabel createLabel(int index) {
+    int randomNumber = 0;
+    if (!availableNumbers.isEmpty()) {
+        randomNumber = availableNumbers.remove(0);  // Lấy số từ danh sách
+        System.out.println("Created label with number: " + randomNumber);  // In số được tạo cho JLabel
+    } else {
+        System.out.println("Danh sách availableNumbers đã rỗng!");  // Kiểm tra nếu danh sách trống
+    }
+    JLabel label = new JLabel(String.valueOf(randomNumber), SwingConstants.CENTER);
+    label.setBackground(Color.WHITE);
+    label.setOpaque(true);
+    label.setForeground(Color.BLACK);
+    label.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    label.setFont(new Font("Arial", Font.PLAIN, 24));
+    originalPositions.put(label, index);
+    return label;
+}
+
+    
+    private int totalClicks = 0; 
+    private void addLabelListeners() {
+        for (JLabel label : labels) {
+            label.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    totalClicks++; // Tăng biến đếm mỗi lần click
+                    System.out.println("Label clicked: " + label.getText());
+                    System.out.println("Total clicks: " + totalClicks); // In tổng số lượt click
+
+                    // Di chuyển giữa các panel
+                    if (containerPanel.isAncestorOf(label)) {
+                        moveToAnswerPanel(label);
+                    } else {
+                        moveToContainerPanel(label);
+                    }
+                }
+            });
+        }
+    }
+
+    private void moveToAnswerPanel(JLabel label) {
+        if (!emptyPanels.isEmpty()) {
+            int emptyPanelIndex = emptyPanels.poll();
+            JPanel emptyPanel = answerJPanels[emptyPanelIndex];
+            emptyPanel.add(label); 
+            answerPositions.put(label, emptyPanelIndex);         
+            label.setBounds(emptyPanel.getBounds());             
+            emptyPanels.remove(emptyPanelIndex);
+            
+            emptyPanel.revalidate();
+            emptyPanel.repaint();
+            updatePanelsAfterMove(); 
+        }
+    }
+
+
+    private void moveToContainerPanel(JLabel label) {
+        int originalPosition = originalPositions.get(label);
+        JPanel originalJPanel = containerJPanels[originalPosition];
+        originalJPanel.add(label);
+        emptyPanels.add(answerPositions.get(label));
+        answerPositions.put(label, null);
+        
+        originalJPanel.revalidate();
+        originalJPanel.repaint();
+        updatePanelsAfterMove();
+    }
+    
+    private void updatePanelsAfterMove() {
+        answerPanel.revalidate();
+        answerPanel.repaint();
+        containerPanel.revalidate();
+        containerPanel.repaint();
+        revalidate();
+        repaint();
+    }
+    
+    public String getTextByAnswerPosition() {
+        String result = "";
+
+        boolean hasNullPosition = answerPositions.values().stream().anyMatch(Objects::isNull);
+        if (hasNullPosition) {
+            return result;
+        }
+
+        for (int i = 1; i <= 10; i++) {
+            // Duyệt qua các entry trong answerPositions và kiểm tra vị trí
+            for (Map.Entry<JLabel, Integer> entry : answerPositions.entrySet()) {
+                Integer position = entry.getValue();
+                if (position != null && position == i) {
+                    JLabel label = entry.getKey();
+                    try {
+                        result += label.getText() + ",";
+                    } catch (NumberFormatException e) {
+                        System.err.println("Không thể chuyển đổi text của JLabel thành Integer: " + label.getText());
+                    }
+                }
+            }
+        }
+
+        return result.substring(0, result.length() - 1);
+    }
+private void resetGameState() {
+    // Di chuyển tất cả các JLabel về containerPanel ban đầu
+    for (Map.Entry<JLabel, Integer> entry : answerPositions.entrySet()) {
+        JLabel label = entry.getKey();
+        Integer position = entry.getValue();
+
+        if (position != null) { // Nếu JLabel đang nằm ở answerPanel
+            moveToContainerPanel(label); // Di chuyển JLabel về containerPanel
+        }
+    }
+
+    // Reset lại danh sách emptyPanels
+    emptyPanels.clear();
+    for (int i = 0; i < answerJPanels.length; i++) {
+        emptyPanels.add(i); // Thêm lại tất cả các vị trí trống vào emptyPanels
+    }
+
+    // Làm sạch trạng thái trong answerPositions
+    answerPositions.clear();
+
+    // Cập nhật lại giao diện sau khi reset
+    updatePanelsAfterMove();
+
+    // In thông báo để kiểm tra quá trình reset (tuỳ chọn)
+    System.out.println("Game state has been reset.");
+}
+
+
+public void setPanel(int a) {
+    if (a == 1) {
+        gamePanel.setVisible(true);
+    }
+    if (a == 0) {
+        gamePanel.setVisible(false);
+        resetGameState(); 
+    }
+}
+
+
+
     
     public void setWaitingRoom () {
         
@@ -116,45 +303,6 @@ public class GameView extends javax.swing.JFrame {
         infoPLayer.setText("Đối đầu cùng:" + username);
     }
     
-    public void setQuestion1 (String a, String answerA, String answerB, String answerC, String answerD) {
-        setA1(a);
-       
-        lbQuestion1.setText("1. " + a );
-        answer1a.setText(answerA);
-        answer1b.setText(answerB);
-        answer1c.setText(answerC);
-        answer1d.setText(answerD);
-    }
-    
-    public void setQuestion2 (String a,  String answerA, String answerB, String answerC, String answerD) {
-        setA2(a);
-        
-        lbQuestion2.setText("2. " + a );
-        answer2a.setText(answerA);
-        answer2b.setText(answerB);
-        answer2c.setText(answerC);
-        answer2d.setText(answerD);
-    }
-    
-    public void setQuestion3 (String a, String answerA, String answerB, String answerC, String answerD) {
-        setA3(a);
-        
-        lbQuestion3.setText("3. " + a );
-        answer3a.setText(answerA);
-        answer3b.setText(answerB);
-        answer3c.setText(answerC);
-        answer3d.setText(answerD);
-    }
-    
-    public void setQuestion4 (String a,  String answerA, String answerB, String answerC, String answerD) {
-        setA4(a);
-       
-        lbQuestion4.setText("4. " + a );
-        answer4a.setText(answerA);
-        answer4b.setText(answerB);
-        answer4c.setText(answerC);
-        answer4d.setText(answerD);
-    }
     
     public void setStateHostRoom () {
         answer = false;
@@ -181,13 +329,42 @@ public class GameView extends javax.swing.JFrame {
         lbWaiting.setText("Đợi kết quả trả về từ Server...");
     }
     
-    public void setStartGame (int matchTimeLimit) {
+    public void setStartGame (int matchTimeLimit, String numbers) {
+        setPanel(0);
         answer = false;
-        buttonGroup1.clearSelection();
-        buttonGroup2.clearSelection();
-        buttonGroup3.clearSelection();
-        buttonGroup4.clearSelection();
+        if (numbers == null || numbers.trim().isEmpty()) {
+        throw new IllegalArgumentException("Chuỗi không hợp lệ");
+    }
+
+    // Tách chuỗi thành mảng
+    String[] numberStrings = numbers.split(",");
+    System.out.println("Numbers received: " + numbers);  // In ra chuỗi numbers nhận được từ server
+
+    // Kiểm tra nếu không đủ 10 số
+    if (numberStrings.length != 10) {
+        throw new IllegalArgumentException("Cần đúng 10 số để khởi tạo game");
+    }
+
+    // Xóa danh sách cũ và thêm các số từ chuỗi
+    availableNumbers.clear();
+    for (String numStr : numberStrings) {
+        try {
+            int num = Integer.parseInt(numStr.trim()); // Chuyển đổi chuỗi thành số nguyên
+            availableNumbers.add(num);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Chuỗi chứa giá trị không phải số: " + numStr, e);
+        }
+    }
+    
+    // In ra trạng thái của availableNumbers sau khi set game
+   System.out.println("After setting game: " + availableNumbers);
+            
         
+        containerPanel.setPreferredSize(new java.awt.Dimension(710, 172)); 
+      
+        addPanelsToContainerPanel();
+ 
+        addLabelListeners();  
         btnStart.setVisible(false);
         lbWaiting.setVisible(false);
         setPanel(1);
@@ -231,55 +408,15 @@ public class GameView extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, msg);
     }
     
-    public String getSelectedButton1() {  
-        for (Enumeration<AbstractButton> buttons = buttonGroup1.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-            if (button.isSelected()) {
-                    return button.getText();
-            }
-        }
-        return null;
-    }
-    
-    public String getSelectedButton2() {  
-        for (Enumeration<AbstractButton> buttons = buttonGroup2.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-            if (button.isSelected()) {
-                    return button.getText();
-            }
-        }
-        return null;
-    }
-    
-    public String getSelectedButton3() {  
-        for (Enumeration<AbstractButton> buttons = buttonGroup3.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-            if (button.isSelected()) {
-                    return button.getText();
-            }
-        }
-        return null;
-    }
-    
-    public String getSelectedButton4() {  
-        for (Enumeration<AbstractButton> buttons = buttonGroup4.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-            if (button.isSelected()) {
-                    return button.getText();
-            }
-        }
-        return null;
-    }
     
     public void pauseTime () {
-        // pause timer
         matchTimer.pause();
     }
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    
+    public void continueTime(){
+        matchTimer.resume();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -304,33 +441,12 @@ public class GameView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
         lbWaiting = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        lbQuestion4 = new javax.swing.JLabel();
-        answer4a = new javax.swing.JRadioButton();
-        answer4b = new javax.swing.JRadioButton();
-        answer4c = new javax.swing.JRadioButton();
-        answer4d = new javax.swing.JRadioButton();
-        jPanel4 = new javax.swing.JPanel();
-        lbQuestion3 = new javax.swing.JLabel();
-        answer3a = new javax.swing.JRadioButton();
-        answer3b = new javax.swing.JRadioButton();
-        answer3c = new javax.swing.JRadioButton();
-        answer3d = new javax.swing.JRadioButton();
-        jPanel3 = new javax.swing.JPanel();
-        lbQuestion2 = new javax.swing.JLabel();
-        answer2a = new javax.swing.JRadioButton();
-        answer2b = new javax.swing.JRadioButton();
-        answer2c = new javax.swing.JRadioButton();
-        answer2d = new javax.swing.JRadioButton();
-        jPanel2 = new javax.swing.JPanel();
-        lbQuestion1 = new javax.swing.JLabel();
-        answer1a = new javax.swing.JRadioButton();
-        answer1b = new javax.swing.JRadioButton();
-        answer1c = new javax.swing.JRadioButton();
-        answer1d = new javax.swing.JRadioButton();
+        gamePanel = new javax.swing.JPanel();
+        answerPanel = new javax.swing.JPanel();
+        containerPanel = new javax.swing.JPanel();
         rectangleBackground2 = new view.RectangleBackground();
-        win = new view.RectangleBackground();
         lose = new view.RectangleBackground();
+        win = new view.RectangleBackground();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -458,13 +574,13 @@ public class GameView extends javax.swing.JFrame {
         );
 
         rectangleBackground1.add(panelPlayAgain);
-        panelPlayAgain.setBounds(90, 200, 800, 50);
+        panelPlayAgain.setBounds(90, 160, 800, 50);
 
         pbgTimer.setBackground(new java.awt.Color(255, 255, 255));
         pbgTimer.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         pbgTimer.setStringPainted(true);
         rectangleBackground1.add(pbgTimer);
-        pbgTimer.setBounds(30, 250, 860, 50);
+        pbgTimer.setBounds(40, 170, 860, 50);
         pbgTimer.getAccessibleContext().setAccessibleName("");
 
         btnSubmit.setBackground(new java.awt.Color(204, 0, 0));
@@ -481,7 +597,7 @@ public class GameView extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Static/timing.gif"))); // NOI18N
         rectangleBackground1.add(jLabel1);
-        jLabel1.setBounds(910, 230, 87, 70);
+        jLabel1.setBounds(920, 150, 87, 70);
 
         btnStart.setBackground(new java.awt.Color(204, 0, 0));
         btnStart.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -501,247 +617,75 @@ public class GameView extends javax.swing.JFrame {
         rectangleBackground1.add(lbWaiting);
         lbWaiting.setBounds(40, 50, 288, 48);
 
-        jPanel5.setBackground(new java.awt.Color(204, 0, 0));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        gamePanel.setBackground(new java.awt.Color(255, 255, 255));
+        gamePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        lbQuestion4.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        lbQuestion4.setForeground(new java.awt.Color(255, 255, 255));
-        lbQuestion4.setText("4. CHUỖI SẮP XẾP 4");
+        answerPanel.setBackground(new java.awt.Color(0, 204, 255));
+        answerPanel.setPreferredSize(new java.awt.Dimension(890, 90));
 
-        buttonGroup4.add(answer4a);
-        answer4a.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer4a.setText("jRadioButton1");
-
-        buttonGroup4.add(answer4b);
-        answer4b.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer4b.setText("jRadioButton2");
-
-        buttonGroup4.add(answer4c);
-        answer4c.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer4c.setText("jRadioButton3");
-
-        buttonGroup4.add(answer4d);
-        answer4d.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer4d.setText("jRadioButton4");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbQuestion4, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(answer4a, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(answer4b, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(answer4c, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(answer4d, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+        javax.swing.GroupLayout answerPanelLayout = new javax.swing.GroupLayout(answerPanel);
+        answerPanel.setLayout(answerPanelLayout);
+        answerPanelLayout.setHorizontalGroup(
+            answerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 888, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbQuestion4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(answer4a)
-                .addGap(18, 18, 18)
-                .addComponent(answer4b)
-                .addGap(18, 18, 18)
-                .addComponent(answer4c)
-                .addGap(18, 18, 18)
-                .addComponent(answer4d)
+        answerPanelLayout.setVerticalGroup(
+            answerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
+
+        containerPanel.setBackground(new java.awt.Color(204, 0, 0));
+        containerPanel.setMinimumSize(new java.awt.Dimension(710, 172));
+
+        javax.swing.GroupLayout containerPanelLayout = new javax.swing.GroupLayout(containerPanel);
+        containerPanel.setLayout(containerPanelLayout);
+        containerPanelLayout.setHorizontalGroup(
+            containerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 710, Short.MAX_VALUE)
+        );
+        containerPanelLayout.setVerticalGroup(
+            containerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 172, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
+        gamePanel.setLayout(gamePanelLayout);
+        gamePanelLayout.setHorizontalGroup(
+            gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gamePanelLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(answerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+            .addGroup(gamePanelLayout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(containerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        rectangleBackground1.add(jPanel5);
-        jPanel5.setBounds(730, 310, 180, 240);
-
-        jPanel4.setBackground(new java.awt.Color(204, 0, 0));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel4.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        lbQuestion3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        lbQuestion3.setForeground(new java.awt.Color(255, 255, 255));
-        lbQuestion3.setText("3. CHUỖI SẮP XẾP 3");
-
-        buttonGroup3.add(answer3a);
-        answer3a.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer3a.setText("jRadioButton1");
-
-        buttonGroup3.add(answer3b);
-        answer3b.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer3b.setText("jRadioButton2");
-
-        buttonGroup3.add(answer3c);
-        answer3c.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer3c.setText("jRadioButton3");
-
-        buttonGroup3.add(answer3d);
-        answer3d.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer3d.setText("jRadioButton4");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbQuestion3, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(answer3a, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(answer3b, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(answer3c, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(answer3d, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbQuestion3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(answer3a)
-                .addGap(18, 18, 18)
-                .addComponent(answer3b)
-                .addGap(18, 18, 18)
-                .addComponent(answer3c)
-                .addGap(18, 18, 18)
-                .addComponent(answer3d)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        gamePanelLayout.setVerticalGroup(
+            gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gamePanelLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(answerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(containerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        rectangleBackground1.add(jPanel4);
-        jPanel4.setBounds(520, 310, 167, 240);
-
-        jPanel3.setBackground(new java.awt.Color(204, 0, 0));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        lbQuestion2.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        lbQuestion2.setForeground(new java.awt.Color(255, 255, 255));
-        lbQuestion2.setText("2. CHUỖI SẮP XẾP 2");
-
-        buttonGroup2.add(answer2a);
-        answer2a.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer2a.setText("jRadioButton1");
-
-        buttonGroup2.add(answer2b);
-        answer2b.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer2b.setText("jRadioButton2");
-
-        buttonGroup2.add(answer2c);
-        answer2c.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer2c.setText("jRadioButton3");
-
-        buttonGroup2.add(answer2d);
-        answer2d.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer2d.setText("jRadioButton4");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(answer2a, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(answer2b, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(answer2c, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(answer2d, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbQuestion2, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbQuestion2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(answer2a)
-                .addGap(18, 18, 18)
-                .addComponent(answer2b)
-                .addGap(18, 18, 18)
-                .addComponent(answer2c)
-                .addGap(18, 18, 18)
-                .addComponent(answer2d)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        rectangleBackground1.add(jPanel3);
-        jPanel3.setBounds(270, 310, 190, 240);
-
-        jPanel2.setBackground(new java.awt.Color(204, 0, 0));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        lbQuestion1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        lbQuestion1.setForeground(new java.awt.Color(255, 255, 255));
-        lbQuestion1.setText("1. CHUỖI SẮP XẾP 1");
-
-        buttonGroup1.add(answer1a);
-        answer1a.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer1a.setText("jRadioButton1");
-
-        buttonGroup1.add(answer1b);
-        answer1b.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer1b.setText("jRadioButton2");
-
-        buttonGroup1.add(answer1c);
-        answer1c.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer1c.setText("jRadioButton3");
-
-        buttonGroup1.add(answer1d);
-        answer1d.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        answer1d.setText("jRadioButton4");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbQuestion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(answer1a, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(answer1b, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(answer1c, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(answer1d, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbQuestion1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(answer1a)
-                .addGap(18, 18, 18)
-                .addComponent(answer1b)
-                .addGap(18, 18, 18)
-                .addComponent(answer1c)
-                .addGap(18, 18, 18)
-                .addComponent(answer1d)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        rectangleBackground1.add(jPanel2);
-        jPanel2.setBounds(30, 310, 175, 240);
+        rectangleBackground1.add(gamePanel);
+        gamePanel.setBounds(40, 230, 930, 320);
         rectangleBackground1.add(rectangleBackground2);
         rectangleBackground2.setBounds(190, 190, 0, 0);
 
-        win.setBorderSize(0);
-        win.setImage(new javax.swing.ImageIcon(getClass().getResource("/Static/think-smart.gif"))); // NOI18N
-        rectangleBackground1.add(win);
-        win.setBounds(230, 0, 340, 200);
-
         lose.setBorderSize(0);
         lose.setImage(new javax.swing.ImageIcon(getClass().getResource("/Static/khocthua.gif"))); // NOI18N
+
+        win.setBorderSize(0);
+        win.setImage(new javax.swing.ImageIcon(getClass().getResource("/Static/think-smart.gif"))); // NOI18N
+        lose.add(win);
+        win.setBounds(-70, 0, 280, 160);
+
         rectangleBackground1.add(lose);
-        lose.setBounds(440, 0, 350, 200);
+        lose.setBounds(430, 0, 290, 160);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -775,7 +719,17 @@ public class GameView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        ClientRun.socketHandler.submitResult(competitor);
+
+        String result = getTextByAnswerPosition();
+        String tong = String.valueOf(totalClicks);
+        ClientRun.socketHandler.submitResult(competitor, result, tong);
+        if (result == "") {
+            ClientRun.gameView.showMessage("Hãy điển đầy đi!");
+        } else {
+            System.out.println(result);
+
+       
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
@@ -824,40 +778,7 @@ public class GameView extends javax.swing.JFrame {
             }
         });
     }
-    
-    public String getA1() {
-        return a1;
-    }
-
-    public void setA1(String a1) {
-        this.a1 = a1;
-    }
-
-    public String getA2() {
-        return a2;
-    }
-
-    public void setA2(String a2) {
-        this.a2 = a2;
-    }
-
-    public String getA3() {
-        return a3;
-    }
-
-    public void setA3(String a3) {
-        this.a3 = a3;
-    }
-
-    public String getA4() {
-        return a4;
-    }
-
-    public void setA4(String a4) {
-        this.a4 = a4;
-    }
-
-   
+       
 
     public boolean isAnswer() {
         return answer;
@@ -870,22 +791,7 @@ public class GameView extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton answer1a;
-    private javax.swing.JRadioButton answer1b;
-    private javax.swing.JRadioButton answer1c;
-    private javax.swing.JRadioButton answer1d;
-    private javax.swing.JRadioButton answer2a;
-    private javax.swing.JRadioButton answer2b;
-    private javax.swing.JRadioButton answer2c;
-    private javax.swing.JRadioButton answer2d;
-    private javax.swing.JRadioButton answer3a;
-    private javax.swing.JRadioButton answer3b;
-    private javax.swing.JRadioButton answer3c;
-    private javax.swing.JRadioButton answer3d;
-    private javax.swing.JRadioButton answer4a;
-    private javax.swing.JRadioButton answer4b;
-    private javax.swing.JRadioButton answer4c;
-    private javax.swing.JRadioButton answer4d;
+    private javax.swing.JPanel answerPanel;
     private javax.swing.JButton btnLeaveGame;
     private javax.swing.JButton btnNo;
     private javax.swing.JButton btnStart;
@@ -895,19 +801,13 @@ public class GameView extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JPanel containerPanel;
+    private javax.swing.JPanel gamePanel;
     private javax.swing.JLabel infoPLayer;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JLabel lbQuestion1;
-    private javax.swing.JLabel lbQuestion2;
-    private javax.swing.JLabel lbQuestion3;
-    private javax.swing.JLabel lbQuestion4;
     private javax.swing.JLabel lbResult;
     private javax.swing.JLabel lbWaiting;
     private javax.swing.JLabel lbWaitingTimer;

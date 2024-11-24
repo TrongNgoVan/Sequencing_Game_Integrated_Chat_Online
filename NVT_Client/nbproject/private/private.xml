@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/run/ClientRun.java</file>
             <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/view/HomeView.java</file>
+            <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/view/SortingGame.java</file>
             <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/view/InfoPlayerView.java</file>
             <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/view/MessageView.java</file>
             <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/view/ConnectServer.java</file>
@@ -16,6 +17,8 @@
             <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/view/RegisterView.java</file>
             <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/view/GameView.java</file>
             <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/view/ImageAvatar.java</file>
+            <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/model/DemTG.java</file>
+            <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/view/PieChart.java</file>
             <file>file:/C:/Users/MEDIAMART%20PHU%20SON/Documents/NetBeansProjects/Sequencing_Game_Integrated_Chat_Online-master/NVT_Client/src/view/RectangleBackground.java</file>
         </group>
     </open-files>

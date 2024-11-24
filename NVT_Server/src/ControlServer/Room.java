@@ -126,21 +126,25 @@ public class Room {
     public String handleResultClient() throws SQLException {
         int timeClient1 = 0;
         int timeClient2 = 0;
-        
+        int tong1 =0;
+        int tong2=0;
         if (resultClient1 != null) {
             String[] splitted1 = resultClient1.split(";");
-            timeClient1 = Integer.parseInt(splitted1[12]);
+            timeClient1 = Integer.parseInt(splitted1[5]);
+            tong1 = Integer.parseInt(splitted1[6]);
+            
         }
         if (resultClient2 != null) {
             String[] splitted2 = resultClient2.split(";");
-            timeClient2 = Integer.parseInt(splitted2[12]);
+            timeClient2 = Integer.parseInt(splitted2[5]);
+            tong2 = Integer.parseInt(splitted2[6]);
         }
         
-        if (resultClient1 == null & resultClient2 == null) {
+        if (resultClient1 == null && resultClient2 == null) {
             draw();
             return "DRAW";
         } else if (resultClient1 != null && resultClient2 == null) {
-            if (calculateResult(resultClient1) > 0) {
+            if (calculateResult(resultClient1)) {
                 client1Win(timeClient1);
                 return client1.getLoginUser();
             } else {
@@ -148,7 +152,7 @@ public class Room {
                 return "DRAW";
             }
         } else if (resultClient1 == null && resultClient2 != null) {
-            if (calculateResult(resultClient2) > 0) {
+            if (calculateResult(resultClient2)) {
                 client2Win(timeClient2);
                 return client2.getLoginUser();
             } else {
@@ -156,13 +160,35 @@ public class Room {
                 return "DRAW";
             }
         } else if (resultClient1 != null && resultClient2 != null) {
-            int pointClient1 = calculateResult(resultClient1);
-            int pointClient2 = calculateResult(resultClient2);
-            
-            if (pointClient1 > pointClient2) {
+            boolean result1Correct = calculateResult(resultClient1);
+            boolean result2Correct = calculateResult(resultClient2);
+
+            if (result1Correct && result2Correct) {
+                // Nếu cả hai đều đúng, so sánh số lượt thao tác
+                 if (tong1 < tong2){
+                    client1Win(timeClient1);
+                    return client1.getLoginUser();
+                 }else if(tong1 >tong2){
+                    client2Win(timeClient2);
+                    return client2.getLoginUser();
+                 }else{
+                        if (timeClient1 < timeClient2) {
+                            client1Win(timeClient1);
+                            return client1.getLoginUser();
+                        } else if (timeClient1 > timeClient2) {
+                            client2Win(timeClient2);
+                            return client2.getLoginUser();
+                        } else {
+                    
+                            draw();
+                            return "DRAW";
+                        }
+                    }
+                
+            } else if (result1Correct) {
                 client1Win(timeClient1);
                 return client1.getLoginUser();
-            } else if (pointClient1 < pointClient2) {
+            } else if (result2Correct) {
                 client2Win(timeClient2);
                 return client2.getLoginUser();
             } else {
@@ -173,35 +199,25 @@ public class Room {
         return null;
     }
     
-    public int calculateResult(String received) {
-    String[] splitted = received.split(";");
-    
-    String user1 = splitted[0];
-    
-    // Lấy các chuỗi câu hỏi và đáp án
-    String[] a = {splitted[4], splitted[6], splitted[8], splitted[10]};
-    String[] r = {splitted[5], splitted[7], splitted[9], splitted[11]};
+    public boolean calculateResult(String received) {
+        String[] splitted = received.split(";");
 
-    int correctAnswers = 0;
+        String user1 = splitted[0];
 
-    // Xử lý từng chuỗi câu hỏi a[i]
-    for (int i = 0; i < a.length; i++) {
-        // Tách chuỗi a[i] thành mảng các giá trị, giả sử chúng được phân cách bởi dấu phẩy
-        String[] splitA = a[i].split(",");
-        // Sắp xếp mảng splitA theo thứ tự tăng dần
-        Arrays.sort(splitA);
-        // Gộp lại thành chuỗi sau khi sắp xếp
-        String sortedA = String.join(",", splitA);
+        String answer = splitted[4];
 
-        // So sánh chuỗi đã sắp xếp với chuỗi đáp án tương ứng r[i]
-        if (sortedA.equals(r[i])) {
-            correctAnswers++;
+        String[] numbers = answer.split(",");
+
+        for (int i = 0; i < numbers.length - 1; i++) {
+            int current = Integer.parseInt(numbers[i]);
+            int next = Integer.parseInt(numbers[i + 1]);
+
+            if (current >= next) {
+                return false;
+            }
         }
+        return true;
     }
-
-    System.out.println(user1 + " : " + correctAnswers + " câu đúng");
-    return correctAnswers;
-}
 
     public void draw () throws SQLException {
         User user1 = new UserController().getUser(client1.getLoginUser());

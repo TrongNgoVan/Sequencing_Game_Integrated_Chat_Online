@@ -53,7 +53,7 @@ public class ConnectServer extends javax.swing.JFrame {
         jLabel1.setText("CONNECT TO SERVER");
 
         txIP.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txIP.setText("26.80.253.0");
+        txIP.setText("localhost");
         txIP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txIPActionPerformed(evt);
