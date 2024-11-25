@@ -277,7 +277,7 @@ public void setPanel(int a) {
     }
     
     public void showAskPlayAgain (String msg) {
-        if(msg == "Chúc mừng bạn đã thắng, bạn được 1.5 điểm, tiếp tục chứ?"){
+        if(msg == "Chúc mừng bạn đã thắng, bạn được 1 điểm, tiếp tục chứ?"){
         win.setVisible(true);
         panelPlayAgain.setVisible(true);
         lbResult.setText(msg);
@@ -553,31 +553,32 @@ public void setPanel(int a) {
             panelPlayAgainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPlayAgainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbResult, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+                .addComponent(lbResult, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbWaitingTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnYes, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnNo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelPlayAgainLayout.setVerticalGroup(
             panelPlayAgainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPlayAgainLayout.createSequentialGroup()
-                .addGroup(panelPlayAgainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lbResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelPlayAgainLayout.createSequentialGroup()
+                .addGroup(panelPlayAgainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPlayAgainLayout.createSequentialGroup()
+                        .addComponent(lbResult, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelPlayAgainLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(panelPlayAgainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnYes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnNo, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                            .addComponent(lbWaitingTimer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(panelPlayAgainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnNo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnYes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbWaitingTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         rectangleBackground1.add(panelPlayAgain);
-        panelPlayAgain.setBounds(90, 160, 800, 50);
+        panelPlayAgain.setBounds(40, 160, 850, 50);
 
         pbgTimer.setBackground(new java.awt.Color(255, 255, 255));
         pbgTimer.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
@@ -685,10 +686,10 @@ public void setPanel(int a) {
         win.setBorderSize(0);
         win.setImage(new javax.swing.ImageIcon(getClass().getResource("/Static/think-smart.gif"))); // NOI18N
         lose.add(win);
-        win.setBounds(-70, 0, 280, 160);
+        win.setBounds(-120, 0, 280, 160);
 
         rectangleBackground1.add(lose);
-        lose.setBounds(430, 0, 290, 160);
+        lose.setBounds(450, 0, 290, 160);
 
         Luat.setBackground(new java.awt.Color(204, 51, 0));
         Luat.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
@@ -762,7 +763,7 @@ public void setPanel(int a) {
     private void LuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LuatActionPerformed
         Luatchoi luatChoiFrame = new Luatchoi();
     
-    // Hiển thị cửa sổ
+      luatChoiFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
       luatChoiFrame.setVisible(true); // Mở cửa sổ LuatChoi
     }//GEN-LAST:event_LuatActionPerformed
 
