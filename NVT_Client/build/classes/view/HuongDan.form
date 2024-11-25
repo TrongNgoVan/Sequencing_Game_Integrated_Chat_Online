@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="451" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="478" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="0" green="33" red="cc" type="rgb"/>
+    </Property>
+    <Property name="autoscrolls" type="boolean" value="true"/>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="52" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="451" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jScrollPane1" alignment="1" pref="632" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="20" style="1"/>
+            </Property>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="                   Lu&#x1ead;t ch&#x1a1;i chi ti&#x1ebf;t&#xa;&#xa;1. Server s&#x1ebd; g&#x1eed;i m&#x1ed9;t d&#xe3;y s&#x1ed1; b&#x1ea5;t k&#x1ef3; &#x111;&#x1ebf;n 2 &#xa;ng&#x1b0;&#x1edd;i ch&#x1a1;i.&#xa;&#xa;2. Nhi&#x1ec7;m v&#x1ee5; c&#x1ee7;a 2 ng&#x1b0;&#x1edd;i l&#xe0; ph&#x1ea3;i s&#x1eaf;p x&#x1ebf;p d&#xe3;y&#xa;s&#x1ed1; sao cho &#x111;&#xfa;ng th&#x1ee9; t&#x1ef1; t&#x103;ng d&#x1ea7;n trong 20s.&#xa;&#xa;3. Ng&#x1b0;&#x1edd;i n&#xe0;o s&#x1eaf;p x&#x1ebf;p &#x111;&#xfa;ng s&#x1ebd; th&#x1eaf;ng.&#xa;&#xa;4. Trong tr&#x1b0;&#x1edd;ng h&#x1ee3;p c&#x1ea3; hai ng&#x1b0;&#x1edd;i s&#x1eaf;p x&#x1ebf;p &#xa;&#x111;&#xfa;ng, h&#x1ec7; th&#x1ed1;ng s&#x1ebd; t&#xed;nh s&#x1ed1; l&#x1ea7;n m&#xe0; m&#x1ed7;i ng&#x1b0;&#x1edd;i &#xa;thao t&#xe1;c &#x111;&#x1ec3; s&#x1eaf;p x&#x1ebf;p, ai thao t&#xe1;c &#xed;t h&#x1a1;n s&#x1ebd; &#xa;th&#x1eaf;ng, n&#x1ebf;u b&#x1eb1;ng nhau s&#x1ebd; x&#x1ebf;p theo th&#x1edd;i gian &#xa;Submit.&#xa;&#xa;5. Ng&#x1b0;&#x1edd;i th&#x1eaf;ng &#x111;&#x1b0;&#x1ee3;c 1 &#x111;i&#x1ec3;m, thua 0 &#x111;i&#x1ec3;m,&#xa;h&#xf2;a 0.5 &#x111;i&#x1ec3;m cho c&#x1ea3; hai.&#xa;&#xa;6. N&#x1ebf;u tho&#xe1;t tr&#x1ead;n gi&#x1eef;a ch&#x1eeb;ng s&#x1ebd; ph&#x1ea3;i ch&#x1ecb;u&#xa;thua.&#xa;&#xa;7. Hai ng&#x1b0;&#x1edd;i c&#xf3; th&#x1ec3; ch&#x1ecd;n ch&#x1a1;i l&#x1ea1;i trong 10s &#xa;sau khi k&#x1ebf;t th&#xfa;c tr&#x1ead;n &#x111;&#x1ea5;u.&#xa;&#xa;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

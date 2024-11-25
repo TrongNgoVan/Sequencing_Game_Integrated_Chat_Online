@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import run.ClientRun;
+
 import model.*;
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -331,6 +332,7 @@ public void setPanel(int a) {
     
     public void setStartGame (int matchTimeLimit, String numbers) {
         setPanel(0);
+        totalClicks = 0;
         answer = false;
         if (numbers == null || numbers.trim().isEmpty()) {
         throw new IllegalArgumentException("Chuỗi không hợp lệ");
@@ -447,6 +449,7 @@ public void setPanel(int a) {
         rectangleBackground2 = new view.RectangleBackground();
         lose = new view.RectangleBackground();
         win = new view.RectangleBackground();
+        Luat = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -687,6 +690,18 @@ public void setPanel(int a) {
         rectangleBackground1.add(lose);
         lose.setBounds(430, 0, 290, 160);
 
+        Luat.setBackground(new java.awt.Color(204, 51, 0));
+        Luat.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        Luat.setForeground(new java.awt.Color(255, 255, 255));
+        Luat.setText("Luật chơi");
+        Luat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LuatActionPerformed(evt);
+            }
+        });
+        rectangleBackground1.add(Luat);
+        Luat.setBounds(860, 90, 110, 40);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -743,6 +758,13 @@ public void setPanel(int a) {
         answer = true;
         hideAskPlayAgain();
     }//GEN-LAST:event_btnYesActionPerformed
+        
+    private void LuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LuatActionPerformed
+        Luatchoi luatChoiFrame = new Luatchoi();
+    
+    // Hiển thị cửa sổ
+      luatChoiFrame.setVisible(true); // Mở cửa sổ LuatChoi
+    }//GEN-LAST:event_LuatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -791,6 +813,7 @@ public void setPanel(int a) {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Luat;
     private javax.swing.JPanel answerPanel;
     private javax.swing.JButton btnLeaveGame;
     private javax.swing.JButton btnNo;

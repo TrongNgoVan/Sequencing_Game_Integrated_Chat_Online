@@ -618,7 +618,7 @@ public class ClientController {
             if (result.equals("DRAW")) {
                 ClientRun.gameView.showAskPlayAgain("Game hòa, cả hai được 0.5 điểm, bạn có muốn tiếp tục chơi không?");
             } else if (result.equals(loginUser)) {
-                ClientRun.gameView.showAskPlayAgain("Chúc mừng bạn đã thắng, bạn được 1.5 điểm, tiếp tục chứ?");
+                ClientRun.gameView.showAskPlayAgain("Chúc mừng bạn đã thắng, bạn được 1 điểm, tiếp tục chứ?");
             } else {
                 ClientRun.gameView.showAskPlayAgain("Rất tiếc bạn đã thua, 0 điểm, tiếp tục chơi ?");
             }
