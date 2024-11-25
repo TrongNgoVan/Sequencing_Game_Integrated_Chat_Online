@@ -79,7 +79,9 @@
 
 
 ### 2.2 Client Login -> Home.
-![image](https://github.com/user-attachments/assets/c7d9d825-17fc-4c6b-9f28-bef44c93733a)
+![image](https://github.com/user-attachments/assets/731a5ac1-2e06-4fd9-895d-d3d05c5d1c04)
+
+
 
 
 
@@ -107,9 +109,11 @@
 ### 2.5 Client chơi Game với nhau.
 
 
-![image](https://github.com/user-attachments/assets/fa5b5e81-7092-4d0d-a67f-9018d5c7e8ad)
+![image](https://github.com/user-attachments/assets/e6337387-27d2-420f-89f4-b4e2735b5ab1)
 
-![image](https://github.com/user-attachments/assets/3276cc69-ccf3-41c3-945d-267b63f79021)
+
+![image](https://github.com/user-attachments/assets/685518b0-6db2-4c8e-84ee-525f3ab8277a)
+
 
 ![image](https://github.com/user-attachments/assets/07461b81-5f4c-4bcb-b1fe-a64b4d497e42)
 
